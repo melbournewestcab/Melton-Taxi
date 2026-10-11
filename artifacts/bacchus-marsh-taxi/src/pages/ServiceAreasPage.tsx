@@ -21,7 +21,7 @@ const CORE_PRIORITY_AREAS = [
     id: "melton-south",
     name: "Melton South",
     postcode: "3338",
-    role: "Core Area",
+    role: "Local Hub",
     desc: "Melton South Railway Station (V/Line transport hub), Coburns Road, Ferris Road, and surrounding residential communities.",
     airportTime: "28–38 min",
     airportFare: "$88–$112",
@@ -30,7 +30,7 @@ const CORE_PRIORITY_AREAS = [
     id: "bacchus-marsh",
     name: "Bacchus Marsh",
     postcode: "3340",
-    role: "Core Area",
+    role: "Local Hub",
     desc: "Bacchus Marsh township, The Avenue of Honour, local train station, orchards, and direct Western Freeway connections.",
     airportTime: "35–45 min",
     airportFare: "$120–$145",
@@ -138,7 +138,7 @@ export default function ServiceAreasPage() {
       {/* ── Core Service Areas Highlight ── */}
       <div className="container max-w-6xl mx-auto px-4 mb-16">
         <div className="text-center mb-10">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary block mb-2">Core Operating Hubs</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-primary block mb-2">Primary Operating Hubs</span>
           <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tight text-white mb-3">
             Melton &amp; Bacchus marsh
           </h2>

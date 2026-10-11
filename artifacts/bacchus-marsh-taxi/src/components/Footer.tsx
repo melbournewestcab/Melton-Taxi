@@ -76,7 +76,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <p>
-            &copy; {new Date().getFullYear()} Melton Taxi. All Rights Reserved. Safe Transport Victoria Accredited.
+            &copy; {new Date().getFullYear()} MELTON TAXI &amp; Bacchus Marsh. All Rights Reserved. Safe Transport Victoria Accredited.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <span>Fixed &amp; Metered Fares</span>

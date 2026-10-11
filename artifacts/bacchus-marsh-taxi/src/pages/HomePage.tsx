@@ -101,8 +101,8 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 container max-w-5xl mx-auto px-4 text-center">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight mb-3 leading-none">
-            Melton <span className="text-primary">Taxi</span>
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-3 leading-tight">
+            MELTON <span className="text-primary">TAXI</span> <span className="text-primary/90 font-extrabold">&amp; Bacchus Marsh</span>
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg font-black uppercase tracking-widest text-primary mb-5">
@@ -227,10 +227,7 @@ export default function HomePage() {
             </div>
 
             {/* Pillar 2: Bacchus Marsh */}
-            <div className="bg-background border border-primary/40 rounded-xl p-8 shadow-md flex flex-col justify-between relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-black font-black uppercase text-[10px] tracking-widest px-3 py-1 rounded-full shadow">
-                Core Area
-              </div>
+            <div className="bg-background border border-primary/40 rounded-xl p-8 shadow-md flex flex-col justify-between">
               <div>
                 <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center text-primary mb-6">
                   <MapPin className="w-6 h-6" />

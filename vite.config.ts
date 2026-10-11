@@ -20,6 +20,7 @@ export default defineConfig({
     dedupe: ["react", "react-dom"],
   },
   build: {
+    target: "es2022",
     outDir: path.resolve(process.cwd(), "dist"),
     emptyOutDir: true,
     rollupOptions: {

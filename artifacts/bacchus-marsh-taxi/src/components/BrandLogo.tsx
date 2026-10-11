@@ -20,7 +20,7 @@ export function BrandLogo({ className = "", size = "md" }: BrandLogoProps) {
         }
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label="Melton Taxi"
+        aria-label="MELTON TAXI"
       >
         <defs>
           {/* Subtle gradient matching theme primary */}
@@ -80,7 +80,7 @@ export function BrandLogo({ className = "", size = "md" }: BrandLogoProps) {
         />
       </svg>
 
-      {/* Single line brand typography */}
+      {/* Brand typography */}
       <div className="flex items-center justify-center gap-1.5 leading-none mt-1 whitespace-nowrap">
         <span
           className="font-black uppercase text-foreground tracking-tight"

@@ -52,8 +52,8 @@ export function SEO({
   breadcrumbs: propBreadcrumbs,
   geoCoordinates,
 }: SEOProps) {
-  const title = propTitle || (suburb ? suburb.metaTitle : "Melton Taxi | Melton Bacchus Marsh Taxi & Airport Transfers | 0401 134 074");
-  const description = propDescription || (suburb ? suburb.metaDesc : "Melton Taxi & Bacchus Marsh Melton cab taxi service. 24/7 reliable airport transfers to Tullamarine & Avalon, fixed fares & Maxi Taxis. Call 0401 134 074.");
+  const title = propTitle || (suburb ? suburb.metaTitle : "MELTON TAXI & Bacchus Marsh | 24/7 Cabs & Airport Transfers | 0401 134 074");
+  const description = propDescription || (suburb ? suburb.metaDesc : "MELTON TAXI & Bacchus Marsh 24/7 taxi cab service. Reliable airport transfers to Tullamarine & Avalon, fixed fares & Maxi Taxis. Call 0401 134 074.");
   const suburbName = propSuburbName || (suburb ? suburb.name : undefined);
   const postcode = propPostcode || (suburb ? suburb.postcode : undefined);
 
@@ -131,7 +131,7 @@ export function SEO({
     updateMetaTag("property", "og:url", fullUrl);
     updateMetaTag("property", "og:image", absoluteImageUrl);
     updateMetaTag("property", "og:image:alt", `${title} - Melton Taxi & Airport Transfers`);
-    updateMetaTag("property", "og:site_name", "Melton Taxi");
+    updateMetaTag("property", "og:site_name", "MELTON TAXI & Bacchus Marsh");
     updateMetaTag("property", "og:locale", "en_AU");
     updateMetaTag("property", "og:locality", suburbName || "Melton");
     updateMetaTag("property", "og:region", "Victoria");
@@ -142,7 +142,7 @@ export function SEO({
     updateMetaTag("name", "twitter:title", title);
     updateMetaTag("name", "twitter:description", description);
     updateMetaTag("name", "twitter:image", absoluteImageUrl);
-    updateMetaTag("name", "twitter:image:alt", `${title} - Melton Taxi & Airport Transfers`);
+    updateMetaTag("name", "twitter:image:alt", `${title} - MELTON TAXI & Bacchus Marsh`);
 
     // 6. Canonical URL Link
     updateCanonicalLink(fullUrl);
@@ -158,7 +158,7 @@ export function SEO({
       {
         "@type": "TaxiService",
         "@id": `${fullUrl}#service`,
-        name: suburbName ? `Melton Taxi - Taxi in ${suburbName}` : "Melton Taxi",
+        name: suburbName ? `MELTON TAXI & Bacchus Marsh - Taxi in ${suburbName}` : "MELTON TAXI & Bacchus Marsh",
         alternateName: [
           "Melton Bacchus Marsh Taxi",
           "Bacchus Marsh Melton Cab Taxi Service",
@@ -176,7 +176,7 @@ export function SEO({
         },
         provider: {
           "@type": "LocalBusiness",
-          name: "Melton Taxi",
+          name: "MELTON TAXI & Bacchus Marsh",
           telephone: "+61401134074",
           email: "p2839582@gmail.com",
           priceRange: "$$",
