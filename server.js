@@ -7,11 +7,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
 
-// Ensure PORT is assigned (Hostinger sets process.env.PORT automatically)
+// Ensure PORT is assigned if missing (Hostinger or local fallback)
 if (!process.env.PORT) {
   process.env.PORT = "3000";
 }
@@ -19,15 +21,8 @@ if (!process.env.PORT) {
 const compiledServer = path.join(__dirname, "dist", "server.cjs");
 
 if (fs.existsSync(compiledServer)) {
-  await import(`file://${compiledServer}`);
+  require(compiledServer);
 } else {
-  console.log("[Hostinger] dist/server.cjs not found. Running build step...");
-  try {
-    const { execSync } = await import("node:child_process");
-    execSync("npm run build", { stdio: "inherit", cwd: __dirname });
-    await import(`file://${compiledServer}`);
-  } catch (err) {
-    console.error("[Hostinger] Auto-build failed. Please run 'npm run build' via SSH or Hostinger Terminal.", err);
-    process.exit(1);
-  }
+  console.error("[Hostinger] dist/server.cjs not found. Please ensure 'npm run build' has been executed.");
+  process.exit(1);
 }

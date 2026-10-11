@@ -15,13 +15,6 @@ const compiledServer = path.join(__dirname, "dist", "server.cjs");
 if (fs.existsSync(compiledServer)) {
   require(compiledServer);
 } else {
-  console.log("[Hostinger] dist/server.cjs not found. Triggering build...");
-  try {
-    const { execSync } = require("child_process");
-    execSync("npm run build", { stdio: "inherit", cwd: __dirname });
-    require(compiledServer);
-  } catch (err) {
-    console.error("[Hostinger] Failed to automatically build:", err);
-    process.exit(1);
-  }
+  console.error("[Hostinger] dist/server.cjs not found. Please ensure 'npm run build' has been executed.");
+  process.exit(1);
 }
