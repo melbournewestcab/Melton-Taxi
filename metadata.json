@@ -1,0 +1,10 @@
+{
+  "name": "Remix MELBOURNE TAXIS",
+  "description": "Melton Taxi - 24/7 taxi service across Melton & Bacchus marsh and all nearby areas. Fixed fare airport transfers to Melbourne Airport (Tullamarine) & Avalon. Call 0401 134 074.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /bmt-owner-panel
+
+Sitemap: https://meltontaxi.com.au/sitemap.xml
