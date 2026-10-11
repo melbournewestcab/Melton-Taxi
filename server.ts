@@ -82,9 +82,18 @@ async function start() {
     });
   }
 
-  const server = app.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Node.js Server] Listening on http://0.0.0.0:${PORT} (mode: ${isProduction ? "production" : "development"})`);
-  });
+  const rawPort = process.env.PORT;
+  const isNamedPipeOrSocket = Boolean(
+    rawPort && (isNaN(Number(rawPort)) || rawPort.startsWith("/") || rawPort.startsWith("\\\\.\\"))
+  );
+
+  const server = isNamedPipeOrSocket
+    ? app.listen(rawPort, () => {
+        console.log(`[Node.js Server] Listening on Passenger socket/pipe: ${rawPort} (mode: ${isProduction ? "production" : "development"})`);
+      })
+    : app.listen(PORT, "0.0.0.0", () => {
+        console.log(`[Node.js Server] Listening on http://0.0.0.0:${PORT} (mode: ${isProduction ? "production" : "development"})`);
+      });
 
   const shutdown = () => {
     console.log("[Node.js Server] Shutting down gracefully...");
