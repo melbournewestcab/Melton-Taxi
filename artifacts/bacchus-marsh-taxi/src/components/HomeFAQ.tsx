@@ -22,11 +22,13 @@ import {
   Clock,
   Car,
   ChevronRight,
+  Baby,
+  Users,
 } from "lucide-react";
 
 export interface FAQItem {
   id: string;
-  category: "booking" | "payment" | "coverage" | "airport";
+  category: "booking" | "airport" | "coverage" | "pricing" | "fleet";
   categoryLabel: string;
   question: string;
   answer: string;
@@ -38,172 +40,203 @@ export interface FAQItem {
 }
 
 export const FAQ_DATA: FAQItem[] = [
-  // ── Booking Processes ──
+  // ── 1. Booking Procedures ──
   {
-    id: "booking-how-to",
+    id: "how-to-book",
     category: "booking",
-    categoryLabel: "Booking Process",
-    question: "How do I book a taxi in Melton & Bacchus Marsh?",
-    answer: "Booking is fast, straightforward, and available 24/7 through three convenient options:",
+    categoryLabel: "Booking Procedures",
+    question: "How do I book a taxi in Melton and Bacchus Marsh?",
+    answer: "Booking your ride is fast, simple, and available 24 hours a day through three easy methods:",
     bullets: [
-      "Online Fare Calculator: Enter your pickup and drop-off addresses above for an instant fixed-rate estimate and instant confirmation.",
-      "Direct 24/7 Phone Dispatch: Call 0401 134 074 directly to speak with our local operations team for on-demand dispatch or pre-bookings.",
-      "WhatsApp Instant Booking: Message us on WhatsApp with your pickup time and destination for rapid confirmation and driver ETA updates."
+      "Instant Online Booking: Use our live fare calculator on this page to enter your pickup and drop-off addresses, select your vehicle type, and receive an instant fixed-fare confirmation.",
+      "Direct Phone Call: Call 0401 134 074 directly to speak with our local team for immediate on-demand pickups or advance reservations.",
+      "WhatsApp Messaging: Send a quick message to 0401 134 074 with your travel date, time, and addresses for prompt confirmation and live driver ETA updates."
     ],
     actionLink: {
-      label: "Open Online Booking Form",
+      label: "Book Your Taxi Online Now",
       href: "/book"
     }
   },
   {
-    id: "booking-advance-notice",
+    id: "advance-booking-notice",
     category: "booking",
-    categoryLabel: "Booking Process",
-    question: "How far in advance should I book my ride?",
-    answer: "We accommodate both immediate on-demand pickups and scheduled advance reservations:",
+    categoryLabel: "Booking Procedures",
+    question: "How far in advance should I book my taxi?",
+    answer: "We accommodate both spontaneous on-demand requests and pre-scheduled journeys:",
     bullets: [
-      "Local On-Demand Trips: Usually dispatched within 10 to 15 minutes across Melton and Bacchus Marsh.",
-      "Airport Transfers: We strongly recommend booking at least 12 to 24 hours in advance, especially for early morning flights (3:00 AM – 6:00 AM) to ensure guaranteed on-time vehicle arrival.",
-      "Maxi Taxis (Group Travel): For 6–11 passenger vans, advance booking guarantees vehicle availability for sporting events, weddings, and group transfers."
+      "Local Trips Across Melton & Bacchus Marsh: Typically dispatched in 10 to 15 minutes across town.",
+      "Airport Transfers: We strongly recommend booking at least 12 to 24 hours in advance, especially for early morning departures (3:00 AM – 6:00 AM), so a dedicated driver is pre-allocated.",
+      "Maxi Taxis & Group Bookings: For 6 to 11 passenger vehicles, booking 24–48 hours ahead ensures guaranteed vehicle availability for weddings, parties, or corporate events."
     ]
   },
   {
-    id: "booking-fare-estimates",
+    id: "booking-cancellation-changes",
     category: "booking",
-    categoryLabel: "Booking Process",
-    question: "Can I get an exact fixed fare quote before travelling?",
-    answer: "Yes! Unlike rideshare apps that leave prices uncertain, Melton Taxi provides 100% upfront fixed fares for all airport transfers and point-to-point journeys. What you see is what you pay—with zero surge pricing during peak hours, bad weather, or public holidays."
-  },
-  {
-    id: "booking-baby-seats",
-    category: "booking",
-    categoryLabel: "Booking Process",
-    question: "Do you supply child safety seats or carry bulky luggage?",
-    answer: "Yes, family safety is a core priority across our fleet:",
-    bullets: [
-      "Baby & Booster Seats: Front-facing, rear-facing baby capsules, and booster seats can be requested in the booking form.",
-      "Bulky Luggage & Prams: Our spacious SUVs and high-roof Toyota HiAce Maxi Taxis comfortably fit oversized suitcases, foldable wheelchairs, prams, and golf bags."
-    ],
-    actionLink: {
-      label: "View Fleet & Luggage Capacities",
-      href: "/fleet"
-    }
+    categoryLabel: "Booking Procedures",
+    question: "Can I change or cancel my booking without penalty?",
+    answer: "Yes. We understand travel schedules change unexpectedly. You can modify your pickup time or cancel your reservation free of charge by calling or messaging our local team on 0401 134 074 ahead of your scheduled pickup time. There are no surprise cancellation penalties."
   },
 
-  // ── Accepted Payment Methods ──
+  // ── 2. Airport Transfers ──
   {
-    id: "payment-methods-accepted",
-    category: "payment",
-    categoryLabel: "Payment Methods",
-    question: "What payment methods are accepted in your taxis?",
-    answer: "Every vehicle in our Melton & Bacchus Marsh fleet is equipped with modern, encrypted payment terminals supporting:",
-    bullets: [
-      "Cash: Pay your driver directly in AUD at the conclusion of your trip.",
-      "Debit & Credit Cards: Visa, MasterCard, and American Express (AMEX) with contactless tap & go.",
-      "Mobile Wallets: Apple Pay, Google Pay, and Samsung Pay.",
-      "Cabcharge: Official Cabcharge FASTCARD, digital e-Tickets, and gift cards.",
-      "Tax Invoices: Instant digital receipts and printed tax receipts compliant with the ATO for business tax deductions."
-    ]
-  },
-  {
-    id: "payment-surge-pricing",
-    category: "payment",
-    categoryLabel: "Payment Methods",
-    question: "Do you ever charge surge pricing or cancellation fees?",
-    answer: "Never. Melton Taxi operates under strict Safe Transport Victoria taxi accreditation. We never multiply fares due to rain, high demand, major Melbourne concerts, or rail replacement disruptions. Upfront quotes remain fixed and honoured."
-  },
-  {
-    id: "payment-cabcharge-corporate",
-    category: "payment",
-    categoryLabel: "Payment Methods",
-    question: "Can businesses set up corporate accounts or use Cabcharge?",
-    answer: "Yes. We partner with local western businesses, healthcare facilities, legal practices, and corporate travellers across Melton and Bacchus Marsh. We offer monthly invoicing, consolidated billing, and seamless priority corporate dispatch.",
-    actionLink: {
-      label: "Learn About Corporate Travel",
-      href: "/services/corporate"
-    }
-  },
-
-  // ── Coverage Areas for Melton & Bacchus Marsh ──
-  {
-    id: "coverage-melton-suburbs",
-    category: "coverage",
-    categoryLabel: "Coverage Areas",
-    question: "Which areas in and around Melton are covered?",
-    answer: "We provide comprehensive 24/7 door-to-door coverage across all City of Melton suburbs including:",
-    bullets: [
-      "Melton & Melton South (including Melton Railway Station & High Street hub)",
-      "Melton West, Kurunjang, and Brookfield",
-      "Cobblebank (Cobblebank Stadium, train station, and shopping precinct) & Strathtulloh",
-      "Thornhill Park, Rockbank, Aintree (Woodlea estate), and Toolern Vale"
-    ],
-    actionLink: {
-      label: "Browse Service Area Directory",
-      href: "/service-areas"
-    }
-  },
-  {
-    id: "coverage-bacchus-marsh-regions",
-    category: "coverage",
-    categoryLabel: "Coverage Areas",
-    question: "Do you service Bacchus Marsh township and surrounding regional towns?",
-    answer: "Yes! Bacchus Marsh is one of our two primary operating headquarters. We service the entire Moorabool Shire corridor:",
-    bullets: [
-      "Bacchus Marsh central township, The Avenue of Honour, and Main Street",
-      "Darley, Maddingley (train station & surrounding estates), and Halletts Way",
-      "Eynesbury township & heritage golf estate",
-      "Ballan, Myrniong, Merrimu, and Hopetoun Park",
-      "Direct transfers connecting Bacchus Marsh to Melton, Ballarat, and Melbourne"
-    ],
-    actionLink: {
-      label: "Bacchus Marsh Taxi Details",
-      href: "/service-areas/bacchus-marsh"
-    }
-  },
-  {
-    id: "coverage-long-distance-cbd",
-    category: "coverage",
-    categoryLabel: "Coverage Areas",
-    question: "Can I book a trip from Melton or Bacchus Marsh to Melbourne CBD or hospitals?",
-    answer: "Absolutely. We routinely provide comfortable, non-stop transfers from Melton and Bacchus Marsh into Melbourne CBD (Southern Cross Station, Crown, Flinders St), medical centers (The Royal Melbourne, Footscray Hospital, Sunshine Hospital), and regional centers like Geelong and Ballarat."
-  },
-
-  // ── Airport Transfers ──
-  {
-    id: "airport-transfers-mel-avv",
+    id: "melbourne-airport-transfers",
     category: "airport",
     categoryLabel: "Airport Transfers",
-    question: "How do airport transfers to Tullamarine & Avalon work?",
-    answer: "We provide express private airport transfers without crowded shuttle delays or parking hassles:",
+    question: "How much does a taxi from Melton or Bacchus Marsh to Melbourne Airport (Tullamarine) cost?",
+    answer: "We offer competitive, transparent fixed rates for direct door-to-door airport transfers to Melbourne Airport (Tullamarine):",
     bullets: [
-      "Direct to Terminal: Picked up right from your doorstep in Melton or Bacchus Marsh and dropped directly at Terminal 1, 2, 3 or Terminal 4 departure doors.",
-      "Fixed Rates: Pre-agreed pricing inclusive of all highway tolls and airport access levies.",
-      "Live Flight Tracking: For incoming flights, our dispatch radar tracks your flight number in real time, adjusting driver arrival automatically if your flight is delayed."
+      "Melton to Tullamarine Airport: Approximately $85 – $115 depending on specific pickup suburb, vehicle size, and standard day/night travel times.",
+      "Bacchus Marsh to Tullamarine Airport: Approximately $120 – $155 via the Western Freeway and Western Ring Road / Calder corridor.",
+      "All-Inclusive Fares: Our upfront fixed quotes include CityLink / freeway tolls and airport access fees, with zero hidden extras or surge multipliers."
     ],
     actionLink: {
-      label: "Airport Transfer Rates & Info",
+      label: "View Airport Transfer Rates & Info",
       href: "/services/airport"
     }
   },
   {
-    id: "airport-early-morning-reliability",
+    id: "early-morning-airport-pickups",
     category: "airport",
     categoryLabel: "Airport Transfers",
-    question: "Can I rely on a driver arriving for an early 4:00 AM airport pickup?",
-    answer: "Yes, 100%. Early morning airport transfers are our specialty. When you book an airport transfer in advance, a dedicated driver is assigned and confirmed ahead of time. You will receive driver contact details so you never have to worry about missing your flight."
+    question: "Do you guarantee early morning airport pickups at 3:00 AM or 4:00 AM?",
+    answer: "Yes, 100% guaranteed. Early morning airport runs are our core specialty. When you pre-book an early airport transfer, your driver is assigned the evening prior. We arrive 5 to 10 minutes before your scheduled pickup so you depart on time and never stress about catching your flight."
+  },
+  {
+    id: "avalon-airport-transfers",
+    category: "airport",
+    categoryLabel: "Airport Transfers",
+    question: "Do you provide taxi services to Avalon Airport?",
+    answer: "Yes! We provide direct transfers to Avalon Airport (AVV) from both Melton and Bacchus Marsh. Travel time is typically 50 to 65 minutes via Geelong-Bacchus Marsh Road, offering a comfortable, direct journey without train or bus connections."
+  },
+  {
+    id: "airport-return-flight-tracking",
+    category: "airport",
+    categoryLabel: "Airport Transfers",
+    question: "How does return airport pickup work if my flight is delayed?",
+    answer: "When booking an airport pickup from Tullamarine or Avalon, simply provide your flight number. Our operations team monitors your flight in real time using live radar tracking. If your arrival is delayed or lands early, your pickup time is automatically synchronized at no extra cost. Your driver will meet you at the designated terminal passenger pickup zone."
+  },
+
+  // ── 3. Melton & Bacchus Marsh Coverage ──
+  {
+    id: "melton-suburbs-serviced",
+    category: "coverage",
+    categoryLabel: "Coverage Areas",
+    question: "Which suburbs around Melton do you service?",
+    answer: "We provide comprehensive 24/7 door-to-door cab coverage across all suburbs throughout the City of Melton, including:",
+    bullets: [
+      "Melton Central & Melton South (including Melton Railway Station and High Street commercial hub)",
+      "Melton West, Kurunjang, and Brookfield",
+      "Cobblebank (Cobblebank Station, Cobblebank Village, and stadium) & Strathtulloh",
+      "Thornhill Park, Rockbank, Aintree (Woodlea Estate), and Toolern Vale"
+    ],
+    actionLink: {
+      label: "Browse All Melton Suburbs",
+      href: "/service-areas"
+    }
+  },
+  {
+    id: "bacchus-marsh-regions-serviced",
+    category: "coverage",
+    categoryLabel: "Coverage Areas",
+    question: "Do you service Bacchus Marsh township and Moorabool Shire?",
+    answer: "Yes! Bacchus Marsh is one of our primary operating hubs. We service all localities across Moorabool Shire:",
+    bullets: [
+      "Bacchus Marsh town centre, Main Street, and Avenue of Honour",
+      "Darley, Maddingley (train station & surrounding estates), and Halletts Way",
+      "Eynesbury township & heritage golf estate",
+      "Ballan, Myrniong, Merrimu, and Hopetoun Park",
+      "Direct transfers connecting Bacchus Marsh to Melton, Ballarat, Geelong, and Melbourne CBD"
+    ],
+    actionLink: {
+      label: "Bacchus Marsh Taxi Services",
+      href: "/service-areas/bacchus-marsh"
+    }
+  },
+  {
+    id: "medical-hospital-transfers",
+    category: "coverage",
+    categoryLabel: "Coverage Areas",
+    question: "Can I book a taxi for hospital visits and medical appointments?",
+    answer: "Yes. We frequently provide compassionate, reliable transportation for non-emergency medical appointments. We service local clinics in Melton and Bacchus Marsh, as well as major metropolitan medical facilities including Sunshine Hospital, Footscray Hospital, and Royal Melbourne Hospital. Wheelchair-accessible vehicles and driver assistance can be arranged upon request."
+  },
+
+  // ── 4. Pricing & Payment ──
+  {
+    id: "surge-pricing-policy",
+    category: "pricing",
+    categoryLabel: "Pricing & Payment",
+    question: "Do you charge surge pricing during peak hours or bad weather?",
+    answer: "Never. Unlike rideshare platforms that multiply prices during rain, busy weekend nights, or major events, Melton Taxi operates under regulated Safe Transport Victoria commercial standards. Our upfront fixed quotes are locked in with zero surge multipliers, surge fees, or unexpected price spikes."
+  },
+  {
+    id: "payment-methods-accepted",
+    category: "pricing",
+    categoryLabel: "Pricing & Payment",
+    question: "What payment methods are accepted in your cabs?",
+    answer: "Every taxi in our fleet is equipped with modern, secure payment terminals supporting all major payment options:",
+    bullets: [
+      "Cash: Pay your driver directly in Australian Dollars (AUD).",
+      "Credit & Debit Cards: Visa, MasterCard, and American Express (AMEX) with contactless tap-and-go.",
+      "Mobile Wallets: Apple Pay, Google Pay, and Samsung Pay.",
+      "Cabcharge: Official Cabcharge FASTCARD, digital e-Tickets, and vouchers.",
+      "Official Tax Invoices: Digital email receipts and printed tax receipts compliant with the Australian Taxation Office (ATO) for business expense claims."
+    ]
+  },
+  {
+    id: "corporate-accounts",
+    category: "pricing",
+    categoryLabel: "Pricing & Payment",
+    question: "Can local businesses set up a corporate travel account?",
+    answer: "Yes. We partner with companies, schools, healthcare providers, and professional practices across Melton and Bacchus Marsh. Corporate accounts include consolidated monthly invoicing, priority booking access, and customized reporting.",
+    actionLink: {
+      label: "Explore Corporate Travel Solutions",
+      href: "/services/corporate"
+    }
+  },
+
+  // ── 5. Fleet & Special Requests ──
+  {
+    id: "maxi-taxi-group-travel",
+    category: "fleet",
+    categoryLabel: "Fleet & Vehicles",
+    question: "Do you have Maxi Taxis for large groups and excess luggage?",
+    answer: "Yes! Our fleet includes 7 to 11 passenger Toyota HiAce Maxi Taxis and spacious People Movers. These vehicles are ideal for family airport transfers with 6+ suitcases, wedding guest transport, sports team travel, and corporate events.",
+    actionLink: {
+      label: "View Fleet Specifications",
+      href: "/fleet"
+    }
+  },
+  {
+    id: "child-baby-safety-seats",
+    category: "fleet",
+    categoryLabel: "Fleet & Vehicles",
+    question: "Can I request a child safety seat or baby capsule for my trip?",
+    answer: "Yes. Family safety is a top priority. When submitting your booking, you can specify your requirement for rear-facing baby capsules, forward-facing child seats, or booster seats. Our vehicles feature certified ISOFIX and tether anchorage points for secure, compliant installation."
+  },
+  {
+    id: "parcel-courier-delivery",
+    category: "fleet",
+    categoryLabel: "Fleet & Vehicles",
+    question: "Do you offer same-day parcel delivery and courier services?",
+    answer: "Yes. We provide express point-to-point parcel delivery across the western suburbs and Melbourne. Whether you need urgent legal documents, medical supplies, automotive spare parts, or sensitive keys delivered, our drivers deliver directly from door to door with instant proof of delivery.",
+    actionLink: {
+      label: "Learn About Parcel Delivery",
+      href: "/services/parcel"
+    }
   }
 ];
 
 export function HomeFAQ() {
-  const [activeCategory, setActiveCategory] = useState<"all" | "booking" | "payment" | "coverage" | "airport">("all");
+  const [activeCategory, setActiveCategory] = useState<"all" | "booking" | "airport" | "coverage" | "pricing" | "fleet">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
   const categories = [
     { id: "all", label: "All Questions", icon: <HelpCircle className="w-3.5 h-3.5" /> },
-    { id: "booking", label: "Booking Process", icon: <CalendarCheck className="w-3.5 h-3.5" /> },
-    { id: "payment", label: "Payment & Rates", icon: <CreditCard className="w-3.5 h-3.5" /> },
-    { id: "coverage", label: "Melton & Bacchus Marsh Coverage", icon: <MapPin className="w-3.5 h-3.5" /> },
+    { id: "booking", label: "Booking Procedures", icon: <CalendarCheck className="w-3.5 h-3.5" /> },
     { id: "airport", label: "Airport Transfers", icon: <Plane className="w-3.5 h-3.5" /> },
+    { id: "coverage", label: "Melton & Bacchus Marsh", icon: <MapPin className="w-3.5 h-3.5" /> },
+    { id: "pricing", label: "Pricing & Payment", icon: <CreditCard className="w-3.5 h-3.5" /> },
+    { id: "fleet", label: "Fleet & Baby Seats", icon: <Car className="w-3.5 h-3.5" /> },
   ] as const;
 
   const filteredFaqs = useMemo(() => {
@@ -222,22 +255,70 @@ export function HomeFAQ() {
     });
   }, [activeCategory, searchQuery]);
 
+  // Schema.org FAQPage structured data for Google rich snippets
+  const faqSchema = useMemo(() => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": FAQ_DATA.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.bullets && faq.bullets.length > 0
+            ? `${faq.answer} ${faq.bullets.join("; ")}`
+            : faq.answer,
+        },
+      })),
+    };
+  }, []);
+
   return (
-    <section className="py-24 bg-card/60 border-b border-border" id="faq" aria-labelledby="faq-heading">
+    <section className="py-24 bg-card/60 border-b border-border relative" id="faq" aria-labelledby="faq-heading">
+      {/* ── JSON-LD Structured Data for Local SEO Rich Snippets ── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <div className="container max-w-5xl mx-auto px-4">
         
         {/* ── Section Header ── */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold uppercase tracking-wider text-primary mb-3">
-            <HelpCircle className="w-3.5 h-3.5" /> Customer Help &amp; FAQs
+            <HelpCircle className="w-3.5 h-3.5" /> Local Taxi Guide &amp; FAQs
           </div>
           <h2 id="faq-heading" className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-4">
             Frequently Asked <span className="text-primary">Questions</span>
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-4" />
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            Quick answers regarding booking procedures, payment options, and 24/7 service coverage across <strong className="text-white">Melton &amp; Bacchus Marsh</strong> and direct airport transfers.
+            Essential information regarding booking procedures, fixed airport fares, fleet options, and 24/7 service coverage across <strong className="text-white">Melton, Bacchus Marsh, and Moorabool Shire</strong>.
           </p>
+        </div>
+
+        {/* ── Quick Highlights Metric Bar ── */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10 max-w-3xl mx-auto">
+          <div className="bg-background border border-border rounded-xl p-3 text-center">
+            <Clock className="w-4 h-4 text-primary mx-auto mb-1" />
+            <div className="text-xs font-bold text-white">24/7 Service</div>
+            <div className="text-[10px] text-muted-foreground">Day &amp; Night Availability</div>
+          </div>
+          <div className="bg-background border border-border rounded-xl p-3 text-center">
+            <ShieldCheck className="w-4 h-4 text-primary mx-auto mb-1" />
+            <div className="text-xs font-bold text-white">Zero Surge</div>
+            <div className="text-[10px] text-muted-foreground">Fixed Fare Guarantee</div>
+          </div>
+          <div className="bg-background border border-border rounded-xl p-3 text-center">
+            <Plane className="w-4 h-4 text-primary mx-auto mb-1" />
+            <div className="text-xs font-bold text-white">MEL &amp; AVV</div>
+            <div className="text-[10px] text-muted-foreground">Express Airport Runs</div>
+          </div>
+          <div className="bg-background border border-border rounded-xl p-3 text-center">
+            <Users className="w-4 h-4 text-primary mx-auto mb-1" />
+            <div className="text-xs font-bold text-white">1–11 Seats</div>
+            <div className="text-[10px] text-muted-foreground">Sedans, SUVs &amp; Maxis</div>
+          </div>
         </div>
 
         {/* ── Search Input ── */}
@@ -245,24 +326,24 @@ export function HomeFAQ() {
           <Search className="w-4 h-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2" />
           <Input
             type="text"
-            placeholder="Search queries (e.g., payment, airport, child seat, Bacchus Marsh)..."
+            placeholder="Search queries (e.g., airport, baby seat, payment, Bacchus Marsh)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 h-10 rounded-full bg-background border-border text-xs sm:text-sm focus-visible:ring-primary shadow-xs"
+            className="pl-10 pr-14 h-10 rounded-full bg-background border-border text-xs sm:text-sm focus-visible:ring-primary shadow-xs"
             aria-label="Search FAQs"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-muted-foreground hover:text-white"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-muted-foreground hover:text-white transition-colors"
             >
               Clear
             </button>
           )}
         </div>
 
-        {/* ── Category Filter Tabs (Round & Compact) ── */}
+        {/* ── Category Filter Tabs ── */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
           {categories.map((cat) => {
             const active = activeCategory === cat.id;
@@ -348,17 +429,17 @@ export function HomeFAQ() {
           </Accordion>
         )}
 
-        {/* ── Direct Dispatch Call / WhatsApp Help Card ── */}
+        {/* ── Direct Support / Booking Action Card ── */}
         <div className="bg-secondary/80 border border-border rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
           <div className="text-center md:text-left space-y-1.5">
             <div className="inline-flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider">
-              <ShieldCheck className="w-4 h-4" /> 24/7 Local Melton &amp; Bacchus Marsh Help
+              <ShieldCheck className="w-4 h-4" /> Local Melton &amp; Bacchus Marsh Team
             </div>
             <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-              Have Another Question or Need an Immediate Cab?
+              Have Another Question or Need an Immediate Taxi?
             </h3>
             <p className="text-muted-foreground text-xs sm:text-sm max-w-xl leading-relaxed">
-              Our 24-hour dispatch staff are based locally in the western suburbs. Call directly or message on WhatsApp for instant rate quotes and fast driver dispatch.
+              Our local customer support team is based in the western suburbs. Call directly or message on WhatsApp for instant fixed fare estimates and driver allocation.
             </p>
           </div>
           <div className="flex flex-wrap sm:flex-nowrap gap-2.5 w-full md:w-auto justify-center shrink-0">

@@ -563,7 +563,7 @@ export default function HomePage() {
               <Link href="/services/a-to-b" className="hover:text-primary transition-colors underline decoration-primary/40 underline-offset-4">Bacchus Marsh Melton Cab Taxi Service</Link>
             </div>
             <a href="tel:0401134074" className="font-bold text-primary hover:underline flex items-center gap-1">
-              Call Dispatch: 0401 134 074
+              Direct Call: 0401 134 074
             </a>
           </div>
         </div>
@@ -579,7 +579,7 @@ export default function HomePage() {
             Need a Melton Taxi or Airport Transfer?
           </h2>
           <p className="text-lg sm:text-xl font-medium mb-8 max-w-2xl mx-auto">
-            Book online in seconds for an instant fixed fare, or call our 24/7 dispatch desk directly on 0401 134 074. Servicing Melton &amp; Bacchus marsh, and all nearby areas.
+            Book online in seconds for an instant fixed fare, or call our local team directly on 0401 134 074. Servicing Melton &amp; Bacchus marsh, and all nearby areas.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Button asChild size="default" className="w-full sm:w-auto h-11 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider bg-black text-white hover:bg-gray-900 rounded-full shadow-md hover:shadow-lg transition-all active:scale-[0.98]">
