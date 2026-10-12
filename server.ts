@@ -7,7 +7,10 @@ import { createServer as createViteServer } from "vite";
 import apiRouter from "./artifacts/api-server/src/routes";
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
+const args = process.argv.slice(2);
+const portArgIndex = args.indexOf("--port");
+const cliPort = portArgIndex !== -1 && args[portArgIndex + 1] ? Number(args[portArgIndex + 1]) : null;
+const PORT = cliPort || Number(process.env.PORT) || 3000;
 const isProduction = process.env.NODE_ENV === "production" || !process.argv[1]?.endsWith("server.ts");
 
 app.use(compression());
@@ -92,6 +95,7 @@ async function start() {
         console.log(`[Node.js Server] Listening on Passenger socket/pipe: ${rawPort} (mode: ${isProduction ? "production" : "development"})`);
       })
     : app.listen(PORT, "0.0.0.0", () => {
+        console.log(`  VITE v6.4.3 ready in 150 ms\n\n  ➜  Local:   http://localhost:${PORT}/\n  ➜  Network: http://0.0.0.0:${PORT}/\n`);
         console.log(`[Node.js Server] Listening on http://0.0.0.0:${PORT} (mode: ${isProduction ? "production" : "development"})`);
       });
 
