@@ -5,6 +5,18 @@ import path from "path";
 import fs from "fs";
 import apiRouter from "./artifacts/api-server/src/routes";
 
+// Universal directory resolution for Hostinger, PM2, and Vite
+const _dn = typeof __dirname !== "undefined" ? __dirname : process.cwd();
+
+// Prevent unhandled crashes from killing the Hostinger Passenger worker process
+process.on("uncaughtException", (err) => {
+  console.error("[Hostinger/Node] Uncaught Exception caught safely:", err);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("[Hostinger/Node] Unhandled Rejection caught safely at:", promise, "reason:", reason);
+});
+
 const app = express();
 const args = process.argv.slice(2);
 const portArgIndex = args.indexOf("--port");
@@ -45,6 +57,14 @@ app.use("/api", (_req: Request, res: Response) => {
   res.status(404).json({ error: "Endpoint not found" });
 });
 
+// Express error handling middleware prevents route failures from terminating the process
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  console.error("[Hostinger/Express] Handled route error:", err);
+  if (!res.headersSent) {
+    res.status(500).json({ error: "Internal Server Error", message: err?.message || "Unexpected error" });
+  }
+});
+
 async function start() {
   if (!isProduction) {
     const { createServer: createViteServer } = await import("vite");
@@ -57,12 +77,12 @@ async function start() {
   } else {
     // Robust detection of production assets for Hostinger, PM2, Passenger & Docker
     const candidateDirs = [
+      path.resolve(_dn, "dist"),
       path.resolve(process.cwd(), "dist"),
-      path.resolve(__dirname, "dist"),
-      path.resolve(__dirname),
+      path.resolve(_dn),
       path.resolve(process.cwd()),
     ];
-    const distPath = candidateDirs.find((dir) => fs.existsSync(path.join(dir, "index.html"))) || path.resolve(process.cwd(), "dist");
+    const distPath = candidateDirs.find((dir) => fs.existsSync(path.join(dir, "index.html"))) || path.resolve(_dn, "dist");
 
     console.log(`[Node.js Server] Serving static build from: ${distPath}`);
 
