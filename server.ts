@@ -3,7 +3,6 @@ import cors from "cors";
 import compression from "compression";
 import path from "path";
 import fs from "fs";
-import { createServer as createViteServer } from "vite";
 import apiRouter from "./artifacts/api-server/src/routes";
 
 const app = express();
@@ -48,9 +47,10 @@ app.use("/api", (_req: Request, res: Response) => {
 
 async function start() {
   if (!isProduction) {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       configFile: path.resolve(process.cwd(), "vite.config.ts"),
-      server: { middlewareMode: true, host: "0.0.0.0", port: PORT },
+      server: { middlewareMode: true, host: "0.0.0.0", port: PORT, hmr: false },
       appType: "spa",
     });
     app.use(vite.middlewares);

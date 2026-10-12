@@ -5,6 +5,9 @@ import path from "path";
 
 export default defineConfig({
   root: path.resolve(process.cwd(), "artifacts/bacchus-marsh-taxi"),
+  server: {
+    hmr: false,
+  },
   plugins: [
     react(),
     tailwindcss(),
