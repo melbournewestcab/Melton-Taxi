@@ -22,7 +22,7 @@ export function Footer() {
                 <Phone className="w-5 h-5" /> 0401 134 074
               </a>
               <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-primary" /> 24/7 Melton &amp; Bacchus marsh Dispatch
+                <Clock className="w-3.5 h-3.5 text-primary" /> 24/7 Melton &amp; Bacchus marsh Service
               </span>
             </div>
           </div>

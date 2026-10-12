@@ -8,6 +8,20 @@ export default defineConfig({
   server: {
     hmr: false,
   },
+  esbuild: {
+    target: "es2022",
+    supported: {
+      destructuring: true,
+    },
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: "es2022",
+      supported: {
+        destructuring: true,
+      },
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),

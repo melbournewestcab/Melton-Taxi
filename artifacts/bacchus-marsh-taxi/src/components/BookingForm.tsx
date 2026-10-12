@@ -2107,7 +2107,7 @@ export function BookingForm({ initialVehicle = "", showMinimumToast = false, sho
                   href="tel:0401134074"
                   className="text-sm font-bold text-primary hover:underline inline-flex items-center gap-1.5"
                 >
-                  📞 Direct 24/7 Melton Dispatch: 0401 134 074
+                  📞 Direct Line: 0401 134 074
                 </a>
               </div>
 
@@ -2116,7 +2116,7 @@ export function BookingForm({ initialVehicle = "", showMinimumToast = false, sho
                   href="tel:0401134074"
                   className="w-full sm:w-1/2 inline-flex items-center justify-center h-10 rounded-full font-bold uppercase tracking-wider bg-primary text-black hover:bg-primary/90 text-xs sm:text-sm shadow-sm hover:shadow-md"
                 >
-                  Call Dispatch
+                  Call Now
                 </a>
                 <Button
                   variant="outline"

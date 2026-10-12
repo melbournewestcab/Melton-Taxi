@@ -2,6 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Suppress Vite HMR WebSocket connection errors in sandbox/preview iframe
+      (function() {
+        window.addEventListener('unhandledrejection', function(e) {
+          var msg = e && e.reason ? String(e.reason.message || e.reason) : '';
+          if (msg.indexOf('WebSocket') !== -1 || msg.indexOf('ws:') !== -1 || msg.indexOf('ws') !== -1) {
+            e.preventDefault();
+            if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          }
+        }, true);
+        window.addEventListener('error', function(e) {
+          var msg = e ? String(e.message || '') : '';
+          if (msg.indexOf('WebSocket') !== -1 || msg.indexOf('ws:') !== -1) {
+            e.preventDefault();
+            if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          }
+        }, true);
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     <title>MELTON TAXI &amp; Bacchus Marsh | 24/7 Cabs &amp; Airport Transfers | 0401 134 074</title>
     <meta name="description" content="MELTON TAXI &amp; Bacchus Marsh 24/7 taxi cab service. Reliable airport transfers to Tullamarine &amp; Avalon, fixed fares &amp; Maxi Taxis. Call 0401 134 074." />

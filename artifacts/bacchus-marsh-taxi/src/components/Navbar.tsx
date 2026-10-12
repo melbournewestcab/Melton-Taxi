@@ -164,16 +164,13 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-2.5">
             <a
               href="tel:0401134074"
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/40 bg-secondary/80 hover:bg-primary/20 text-foreground font-bold text-xs tracking-wide transition-all shadow-xs hover:shadow-sm group"
+              className="flex items-center gap-2 px-3.5 h-9 rounded-full border border-primary/40 bg-secondary/80 hover:bg-primary/20 text-foreground font-bold text-xs tracking-wide transition-all shadow-xs hover:shadow-sm group"
               data-testid="link-nav-call"
             >
               <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-colors">
                 <Phone className="w-3.5 h-3.5" />
               </div>
-              <div className="flex flex-col text-left leading-tight">
-                <span className="text-[9px] text-muted-foreground uppercase font-bold tracking-wider">24/7 Dispatch</span>
-                <span className="text-xs font-black text-primary">0401 134 074</span>
-              </div>
+              <span className="text-xs font-black text-primary">0401 134 074</span>
             </a>
             <Button asChild size="default" className="font-bold uppercase tracking-wider bg-primary hover:bg-primary/90 text-black shadow-xs hover:shadow-md rounded-full h-9 px-4 text-xs transition-all">
               <Link href="/book">Book Now</Link>

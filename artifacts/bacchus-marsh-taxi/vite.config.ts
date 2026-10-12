@@ -28,6 +28,20 @@ if (!basePath) {
 
 export default defineConfig({
   base: basePath,
+  esbuild: {
+    target: "es2022",
+    supported: {
+      destructuring: true,
+    },
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: "es2022",
+      supported: {
+        destructuring: true,
+      },
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),
