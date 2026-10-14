@@ -1,3 +1,19 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="100" fill="#0d1117"/>
+  <rect x="16" y="16" width="480" height="480" rx="84" stroke="#f97316" stroke-width="8" stroke-opacity="0.4"/>
+  <!-- Taxi Sign Glow -->
+  <rect x="156" y="90" width="200" height="48" rx="12" fill="#f97316"/>
+  <text x="256" y="124" fill="#000" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="28" text-anchor="middle" letter-spacing="4">TAXI</text>
+  <!-- Car Silhouette / Cab Front -->
+  <path d="M116 230L156 160C164 146 178 138 194 138H318C334 138 348 146 356 160L396 230H420C431 230 440 239 440 250V330C440 341 431 350 420 350H408V390C408 401 399 410 388 410H364C353 410 344 401 344 390V350H168V390C168 401 159 410 148 410H124C113 410 104 401 104 390V350H92C81 350 72 341 72 330V250C72 239 81 230 92 230H116Z" fill="#161b22" stroke="#f97316" stroke-width="12" stroke-linejoin="round"/>
+  <!-- Windshield -->
+  <path d="M152 220L178 168C182 160 190 156 198 156H314C322 156 330 160 334 168L360 220H152Z" fill="#f97316" fill-opacity="0.25" stroke="#f97316" stroke-width="6"/>
+  <!-- Headlights -->
+  <circle cx="128" cy="285" r="24" fill="#fbbf24"/>
+  <circle cx="384" cy="285" r="24" fill="#fbbf24"/>
+  <!-- Grille -->
+  <rect x="186" y="275" width="140" height="24" rx="6" fill="#f97316" fill-opacity="0.8"/>
+  <!-- Branding Text -->
+  <text x="256" y="450" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="28" text-anchor="middle" letter-spacing="2">MELTON TAXI</text>
+  <text x="256" y="478" fill="#f97316" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="15" text-anchor="middle" letter-spacing="3">&amp; BACCHUS MARSH</text>
 </svg>

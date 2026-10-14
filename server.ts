@@ -18,13 +18,14 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 const app = express();
+app.set("trust proxy", true);
 const args = process.argv.slice(2);
 const portArgIndex = args.indexOf("--port");
 const cliPort = portArgIndex !== -1 && args[portArgIndex + 1] ? Number(args[portArgIndex + 1]) : null;
 const PORT = cliPort || Number(process.env.PORT) || 3000;
 const isProduction = process.env.NODE_ENV === "production" || !process.argv[1]?.endsWith("server.ts");
 
-app.use(compression());
+app.use(compression({ threshold: 512, level: 6 }));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -88,19 +89,24 @@ async function start() {
 
     app.use(
       express.static(distPath, {
-        maxAge: "1d",
+        maxAge: "1y",
         etag: true,
         setHeaders: (res, filePath) => {
+          res.setHeader("X-Content-Type-Options", "nosniff");
           if (filePath.endsWith(".html")) {
-            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-          } else if (filePath.match(/\.(js|css|webp|png|jpg|jpeg|svg|woff2)$/)) {
+            res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+          } else if (filePath.match(/\.(js|css|webp|png|jpg|jpeg|svg|woff2?|ttf|eot|ico)$/)) {
             res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+          } else if (filePath.endsWith(".json")) {
+            res.setHeader("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
           }
         },
       })
     );
 
     app.use((_req: Request, res: Response) => {
+      res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+      res.setHeader("X-Content-Type-Options", "nosniff");
       res.sendFile(path.join(distPath, "index.html"));
     });
   }

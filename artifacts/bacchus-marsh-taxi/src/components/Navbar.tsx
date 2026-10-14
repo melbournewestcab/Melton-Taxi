@@ -15,7 +15,6 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { BrandLogo } from "./BrandLogo";
-import { SUBURBS_DATA } from "@/data/suburbsData";
 
 const FEATURED_SUBURBS = [
   { href: "/service-areas/melton", label: "Melton" },

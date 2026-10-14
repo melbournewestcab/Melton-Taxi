@@ -38,9 +38,25 @@
     <meta name="city" content="Melton" />
     <meta name="state" content="Victoria" />
     <meta name="country" content="Australia" />
+    <meta name="postal-code" content="3337" />
 
-    <!-- Favicons -->
+    <!-- Dublin Core Geographic Metadata -->
+    <meta name="DC.title" content="MELTON TAXI &amp; Bacchus Marsh | 24/7 Cabs &amp; Airport Transfers | 0401 134 074" />
+    <meta name="DC.creator" content="Melton Taxi &amp; Bacchus Marsh Cab Service" />
+    <meta name="DC.coverage" content="Melton, Bacchus Marsh, Melton South, Darley, Cobblebank, Brookfield, Kurunjang, Victoria, Australia" />
+    <meta name="DC.format" content="text/html" />
+    <meta name="DC.language" content="en-AU" />
+
+    <!-- Favicons & Web App Manifest -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Melton Taxi" />
+    <meta name="application-name" content="Melton Taxi" />
+    <meta name="format-detection" content="telephone=yes" />
 
     <!-- DNS prefetch for external services -->
     <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org" />
@@ -58,9 +74,10 @@
     </noscript>
 
     <!-- Preload hero image with high fetchpriority -->
-    <link rel="preload" as="image" href="/images/hero-taxi.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/hero-taxi-mobile.webp" type="image/webp" media="(max-width: 640px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/hero-taxi.webp" type="image/webp" media="(min-width: 641px)" fetchpriority="high" />
 
-    <!-- Open Graph / Social -->
+    <!-- Open Graph / Social & Business Geo Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Melton Taxi | Melton Bacchus Marsh Taxi &amp; Airport Transfers | 0401 134 074" />
     <meta property="og:description" content="Melton Taxi &amp; Bacchus Marsh Melton cab taxi service. 24/7 reliable airport transfers to Tullamarine &amp; Avalon, fixed fares &amp; Maxi Taxis. Call 0401 134 074." />
@@ -70,96 +87,457 @@
     <meta property="og:locale" content="en_AU" />
     <meta property="og:locality" content="Melton" />
     <meta property="og:region" content="Victoria" />
+    <meta property="og:postal-code" content="3337" />
     <meta property="og:country-name" content="Australia" />
+    <meta property="business:contact_data:locality" content="Melton" />
+    <meta property="business:contact_data:region" content="Victoria" />
+    <meta property="business:contact_data:postal_code" content="3337" />
+    <meta property="business:contact_data:country_name" content="Australia" />
+    <meta property="business:contact_data:phone_number" content="+61401134074" />
+    <meta property="place:location:latitude" content="-37.6833" />
+    <meta property="place:location:longitude" content="144.5833" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Melton Taxi | Melton Bacchus Marsh Taxi &amp; Airport Transfers | 0401 134 074" />
     <meta name="twitter:description" content="Melton Taxi &amp; Bacchus Marsh Melton cab taxi service. 24/7 reliable airport transfers to Tullamarine &amp; Avalon, fixed fares &amp; Maxi Taxis. Call 0401 134 074." />
     <meta name="twitter:image" content="/images/hero-taxi.webp" />
 
-    <!-- Structured Data (Schema.org JSON-LD for TaxiService in Melton & Bacchus Marsh) -->
+    <!-- Structured Data (Schema.org JSON-LD Graph for Multi-Location Taxi Service) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "TaxiService",
-      "name": "Melton Taxi",
-      "alternateName": [
-        "Melton Bacchus Marsh Taxi",
-        "Bacchus Marsh Melton Cab Taxi Service",
-        "Melton Taxi Service",
-        "Melton Airport Transfers"
-      ],
-      "url": "https://meltontaxi.com.au/",
-      "telephone": "+61401134074",
-      "email": "p2839582@gmail.com",
-      "description": "24/7 Melton Taxi and Bacchus Marsh Melton cab taxi service offering reliable airport transfers to Melbourne Airport (Tullamarine) & Avalon Airport with fixed upfront pricing, local dispatch, and Maxi Taxis.",
-      "priceRange": "$$",
-      "currenciesAccepted": "AUD",
-      "paymentAccepted": "Cash, Credit Card, EFTPOS, Apple Pay, Google Pay, Cabcharge",
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-        ],
-        "opens": "00:00",
-        "closes": "23:59"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "438",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "serviceType": [
-        "Melton Taxi",
-        "Melton Bacchus Marsh Taxi",
-        "Airport Transfers (Tullamarine & Avalon)",
-        "Bacchus Marsh Melton Cab Taxi Service",
-        "Melton South Taxi",
-        "Bacchus Marsh Taxi (bacchusmarsh taxi)",
-        "Maxi Taxi Melton (1-11 Passengers)",
-        "Silver Service Luxury Chauffeur",
-        "Door to Door 24/7 Cab Service"
-      ],
-      "areaServed": [
-        { "@type": "AdministrativeArea", "name": "Melton (VIC 3337)" },
-        { "@type": "AdministrativeArea", "name": "Melton South" },
-        { "@type": "AdministrativeArea", "name": "Bacchus Marsh (VIC 3340)" },
-        { "@type": "AdministrativeArea", "name": "Melton West" },
-        { "@type": "AdministrativeArea", "name": "Kurunjang" },
-        { "@type": "AdministrativeArea", "name": "Brookfield" },
-        { "@type": "AdministrativeArea", "name": "Cobblebank" },
-        { "@type": "AdministrativeArea", "name": "Darley" },
-        { "@type": "AdministrativeArea", "name": "Maddingley" },
-        { "@type": "AdministrativeArea", "name": "Eynesbury" },
-        { "@type": "AdministrativeArea", "name": "Rockbank & Aintree" },
-        { "@type": "AdministrativeArea", "name": "Thornhill Park" },
-        { "@type": "AdministrativeArea", "name": "Ballan" },
-        { "@type": "AdministrativeArea", "name": "Melbourne Airport (Tullamarine MEL)" },
-        { "@type": "AdministrativeArea", "name": "Avalon Airport (AVV)" }
-      ],
-      "serviceArea": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": -37.6833,
-          "longitude": 144.5833
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://meltontaxi.com.au/#website",
+          "url": "https://meltontaxi.com.au/",
+          "name": "MELTON TAXI & Bacchus Marsh",
+          "description": "24/7 Melton Taxi & Bacchus Marsh taxi cab service. Local Melton & Moorabool Shire pickups, airport transfers to Tullamarine & Avalon with fixed fares.",
+          "inLanguage": "en-AU"
         },
-        "geoRadius": "75000"
-      },
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Melton Taxi",
-        "telephone": "+61401134074",
-        "email": "p2839582@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Melton",
-          "addressRegion": "VIC",
-          "postalCode": "3337",
-          "addressCountry": "AU"
+        {
+          "@type": "TaxiService",
+          "@id": "https://meltontaxi.com.au/#service",
+          "name": "Melton Taxi & Bacchus Marsh Taxi Service",
+          "alternateName": [
+            "Melton Bacchus Marsh Taxi",
+            "Bacchus Marsh Melton Cab Taxi Service",
+            "Melton Taxi Service",
+            "Bacchus Marsh Taxi",
+            "Melton Airport Transfers"
+          ],
+          "url": "https://meltontaxi.com.au/",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "description": "24/7 Melton Taxi and Bacchus Marsh Melton cab taxi service offering reliable airport transfers to Melbourne Airport (Tullamarine) & Avalon Airport with fixed upfront pricing, local dispatch, and Maxi Taxis.",
+          "priceRange": "$$",
+          "currenciesAccepted": "AUD",
+          "paymentAccepted": "Cash, Credit Card, EFTPOS, Apple Pay, Google Pay, Cabcharge",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "438",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "serviceType": [
+            "Melton Taxi",
+            "Melton Bacchus Marsh Taxi",
+            "Airport Transfers (Tullamarine & Avalon)",
+            "Bacchus Marsh Melton Cab Taxi Service",
+            "Melton South Taxi",
+            "Bacchus Marsh Taxi",
+            "Maxi Taxi Melton (1-11 Passengers)",
+            "Silver Service Luxury Chauffeur",
+            "Door to Door 24/7 Cab Service"
+          ],
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Melton",
+              "postalCode": "3337",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.6833, "longitude": 144.5833 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Melton South",
+              "postalCode": "3338",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.7058, "longitude": 144.5772 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Melton West",
+              "postalCode": "3337",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.6789, "longitude": 144.5511 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Bacchus Marsh",
+              "postalCode": "3340",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.6749, "longitude": 144.4387 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Darley",
+              "postalCode": "3340",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.6533, "longitude": 144.4331 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Maddingley",
+              "postalCode": "3340",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.6914, "longitude": 144.4356 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Kurunjang",
+              "postalCode": "3337",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.6586, "longitude": 144.5908 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Brookfield",
+              "postalCode": "3338",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.7022, "longitude": 144.5558 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Cobblebank",
+              "postalCode": "3338",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.7025, "longitude": 144.6067 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Eynesbury",
+              "postalCode": "3338",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.7889, "longitude": 144.5619 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Rockbank",
+              "postalCode": "3335",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.7347, "longitude": 144.6539 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Thornhill Park",
+              "postalCode": "3335",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.7222, "longitude": 144.6306 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Ballan",
+              "postalCode": "3342",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.6000, "longitude": 144.2333 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Melbourne Airport (Tullamarine MEL)",
+              "postalCode": "3045",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -37.6690, "longitude": 144.8410 }
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Avalon Airport (AVV)",
+              "postalCode": "3212",
+              "containedInPlace": { "@type": "State", "name": "Victoria, Australia" },
+              "geo": { "@type": "GeoCoordinates", "latitude": -38.0394, "longitude": 144.4694 }
+            }
+          ],
+          "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": -37.6833,
+              "longitude": 144.5833
+            },
+            "geoRadius": "75000"
+          },
+          "provider": {
+            "@type": "LocalBusiness",
+            "@id": "https://meltontaxi.com.au/#hub-melton",
+            "name": "Melton Taxi - Melton Central Hub",
+            "telephone": "+61401134074",
+            "email": "p2839582@gmail.com",
+            "priceRange": "$$",
+            "url": "https://meltontaxi.com.au/service-areas/melton",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Melton",
+              "addressRegion": "VIC",
+              "postalCode": "3337",
+              "addressCountry": "AU"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": -37.6833,
+              "longitude": 144.5833
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              "opens": "00:00",
+              "closes": "23:59"
+            }
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-bacchus-marsh",
+          "name": "Melton Taxi - Bacchus Marsh & Moorabool Shire Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/service-areas/bacchus-marsh",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bacchus Marsh",
+            "addressRegion": "VIC",
+            "postalCode": "3340",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.6749,
+            "longitude": 144.4387
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-melton-south",
+          "name": "Melton Taxi - Melton South Station Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/service-areas/melton-south",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Melton South",
+            "addressRegion": "VIC",
+            "postalCode": "3338",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.7058,
+            "longitude": 144.5772
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-darley",
+          "name": "Melton Taxi - Darley & Hospital Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/service-areas/darley",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Darley",
+            "addressRegion": "VIC",
+            "postalCode": "3340",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.6533,
+            "longitude": 144.4331
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-cobblebank",
+          "name": "Melton Taxi - Cobblebank Station & Village Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/service-areas/cobblebank",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cobblebank",
+            "addressRegion": "VIC",
+            "postalCode": "3338",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.7025,
+            "longitude": 144.6067
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-kurunjang",
+          "name": "Melton Taxi - Kurunjang Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/service-areas/kurunjang",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kurunjang",
+            "addressRegion": "VIC",
+            "postalCode": "3337",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.6586,
+            "longitude": 144.5908
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-brookfield",
+          "name": "Melton Taxi - Brookfield Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/service-areas/brookfield",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Brookfield",
+            "addressRegion": "VIC",
+            "postalCode": "3338",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.7022,
+            "longitude": 144.5558
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-maddingley",
+          "name": "Melton Taxi - Maddingley Station Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/service-areas/maddingley",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Maddingley",
+            "addressRegion": "VIC",
+            "postalCode": "3340",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.6914,
+            "longitude": 144.4356
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-eynesbury",
+          "name": "Melton Taxi - Eynesbury Estate Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/service-areas/eynesbury",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Eynesbury",
+            "addressRegion": "VIC",
+            "postalCode": "3338",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.7889,
+            "longitude": 144.5619
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://meltontaxi.com.au/#hub-airport-transfers",
+          "name": "Melton Taxi - Melbourne Airport (Tullamarine & Avalon) Transfer Hub",
+          "telephone": "+61401134074",
+          "email": "p2839582@gmail.com",
+          "priceRange": "$$",
+          "url": "https://meltontaxi.com.au/services/airport",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Melbourne Airport",
+            "addressRegion": "VIC",
+            "postalCode": "3045",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.6690,
+            "longitude": 144.8410
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
         }
-      }
+      ]
     }
     </script>
   </head>

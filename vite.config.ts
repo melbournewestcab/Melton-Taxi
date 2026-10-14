@@ -40,7 +40,34 @@ export default defineConfig({
     target: "es2022",
     outDir: path.resolve(process.cwd(), "dist"),
     emptyOutDir: true,
+    cssCodeSplit: true,
+    minify: "esbuild",
+    chunkSizeWarningLimit: 800,
     rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("react-dom") || id.includes("react/")) {
+              return "vendor-react";
+            }
+            if (id.includes("leaflet")) {
+              return "vendor-leaflet";
+            }
+            if (id.includes("@googlemaps")) {
+              return "vendor-maps";
+            }
+            if (id.includes("@tanstack")) {
+              return "vendor-query";
+            }
+            if (id.includes("@radix-ui")) {
+              return "vendor-radix";
+            }
+            if (id.includes("lucide-react")) {
+              return "vendor-icons";
+            }
+          }
+        },
+      },
       onwarn(warning, warn) {
         if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
           return;

@@ -1,0 +1,85 @@
+{
+  "id": "https://meltontaxi.com.au/",
+  "name": "MELTON TAXI & Bacchus Marsh | 24/7 Cabs & Airport Transfers",
+  "short_name": "Melton Taxi",
+  "description": "24/7 Melton Taxi & Bacchus Marsh taxi cab service. Reliable local pickups across Melton, Bacchus Marsh, Melton South, Darley, Maddingley, Cobblebank, Kurunjang, Brookfield, and fixed-fare airport transfers to Melbourne Airport (Tullamarine) & Avalon Airport.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0a",
+  "theme_color": "#f97316",
+  "lang": "en-AU",
+  "dir": "ltr",
+  "categories": ["travel", "transportation", "navigation", "utilities", "business"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book Melton Taxi (VIC 3337)",
+      "short_name": "Melton Taxi",
+      "description": "24/7 cab service across Melton Central, West, Kurunjang & Brookfield",
+      "url": "/service-areas/melton",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Bacchus Marsh Taxi (VIC 3340)",
+      "short_name": "Bacchus Marsh",
+      "description": "Door-to-door cabs across Bacchus Marsh, Darley, Maddingley & Moorabool",
+      "url": "/service-areas/bacchus-marsh",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Melton South Taxi & Station (VIC 3338)",
+      "short_name": "Melton South",
+      "description": "Station pickups and local cabs across Melton South & Coburns Rd",
+      "url": "/service-areas/melton-south",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Darley Taxi (VIC 3340)",
+      "short_name": "Darley Taxi",
+      "description": "Local taxi service across Darley Plaza & Bacchus Marsh Hospital",
+      "url": "/service-areas/darley",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Cobblebank Taxi (VIC 3338)",
+      "short_name": "Cobblebank",
+      "description": "Fast taxi pickups at Cobblebank Station, Village & stadium",
+      "url": "/service-areas/cobblebank",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Melbourne Airport Transfers (MEL & AVV)",
+      "short_name": "Airport Cab",
+      "description": "Fixed-rate direct airport transfers with flight tracking & zero surge",
+      "url": "/services/airport",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Maxi Taxi Melton (1-11 Seats)",
+      "short_name": "Maxi Taxi",
+      "description": "Spacious 7 to 11 seater Maxi Taxis for group transport and luggage",
+      "url": "/fleet",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

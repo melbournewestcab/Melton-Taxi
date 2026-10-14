@@ -1,11 +1,12 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { FloatingContact } from "@/components/FloatingContact";
+
+const Footer = lazy(() => import("@/components/Footer").then((m) => ({ default: m.Footer })));
+const FloatingContact = lazy(() => import("@/components/FloatingContact").then((m) => ({ default: m.FloatingContact })));
+const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
 
 const HomePage = lazy(() => import("@/pages/HomePage"));
 const NotFound = lazy(() => import("@/pages/not-found"));
@@ -93,7 +94,12 @@ function Router() {
 
 function ScrollToTop() {
   const [location] = useLocation();
+  const isFirst = React.useRef(true);
   useEffect(() => {
+    if (isFirst.current) {
+      isFirst.current = false;
+      return;
+    }
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [location]);
   return null;
@@ -102,15 +108,22 @@ function ScrollToTop() {
 function VisitorTracker() {
   const [location] = useLocation();
   useEffect(() => {
-    fetch("/api/visitors/track", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        page: window.location.pathname,
-        referrer: document.referrer,
-        userAgent: navigator.userAgent,
-      }),
-    }).catch(() => {});
+    const track = () => {
+      fetch("/api/visitors/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          page: window.location.pathname,
+          referrer: document.referrer,
+          userAgent: navigator.userAgent,
+        }),
+      }).catch(() => {});
+    };
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      (window as any).requestIdleCallback(track, { timeout: 3000 });
+    } else {
+      setTimeout(track, 2000);
+    }
   }, [location]);
   return null;
 }
