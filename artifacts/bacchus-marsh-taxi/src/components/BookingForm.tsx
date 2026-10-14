@@ -19,7 +19,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 
 import { useCreateBooking, useEstimateFare } from "@workspace/api-client-react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CabchargeIcon } from "@/components/CabchargeIcon";
+
+const bookingQueryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 60_000, gcTime: 300_000 } },
+});
 
 const WhatsAppIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -1019,7 +1024,15 @@ interface BookingFormProps {
   showMinimumPopup?: boolean;
 }
 
-export function BookingForm({ initialVehicle = "", showMinimumToast = false, showMinimumPopup = false }: BookingFormProps) {
+export function BookingForm(props: BookingFormProps) {
+  return (
+    <QueryClientProvider client={bookingQueryClient}>
+      <BookingFormInner {...props} />
+    </QueryClientProvider>
+  );
+}
+
+function BookingFormInner({ initialVehicle = "", showMinimumToast = false, showMinimumPopup = false }: BookingFormProps) {
   const { toast } = useToast();
   const createBooking = useCreateBooking();
   const estimateFare = useEstimateFare();

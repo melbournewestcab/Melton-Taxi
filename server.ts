@@ -23,9 +23,19 @@ const args = process.argv.slice(2);
 const portArgIndex = args.indexOf("--port");
 const cliPort = portArgIndex !== -1 && args[portArgIndex + 1] ? Number(args[portArgIndex + 1]) : null;
 const PORT = cliPort || Number(process.env.PORT) || 3000;
-const isProduction = process.env.NODE_ENV === "production" || !process.argv[1]?.endsWith("server.ts");
+const candidateDirs = [
+  path.resolve(_dn, "dist"),
+  path.resolve(process.cwd(), "dist"),
+  path.resolve(_dn),
+  path.resolve(process.cwd()),
+];
+const distPath = candidateDirs.find((dir) => fs.existsSync(path.join(dir, "index.html")));
+const isProduction =
+  process.env.NODE_ENV === "production" ||
+  !process.argv[1]?.endsWith("server.ts") ||
+  Boolean(distPath && process.env.VITE_DEV !== "1");
 
-app.use(compression({ threshold: 512, level: 6 }));
+app.use(compression({ threshold: 256, level: 6 }));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -76,19 +86,11 @@ async function start() {
     });
     app.use(vite.middlewares);
   } else {
-    // Robust detection of production assets for Hostinger, PM2, Passenger & Docker
-    const candidateDirs = [
-      path.resolve(_dn, "dist"),
-      path.resolve(process.cwd(), "dist"),
-      path.resolve(_dn),
-      path.resolve(process.cwd()),
-    ];
-    const distPath = candidateDirs.find((dir) => fs.existsSync(path.join(dir, "index.html"))) || path.resolve(_dn, "dist");
-
-    console.log(`[Node.js Server] Serving static build from: ${distPath}`);
+    const activeDist = distPath || path.resolve(_dn, "dist");
+    console.log(`[Node.js Server] Serving static build from: ${activeDist}`);
 
     app.use(
-      express.static(distPath, {
+      express.static(activeDist, {
         maxAge: "1y",
         etag: true,
         setHeaders: (res, filePath) => {
@@ -107,7 +109,7 @@ async function start() {
     app.use((_req: Request, res: Response) => {
       res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
       res.setHeader("X-Content-Type-Options", "nosniff");
-      res.sendFile(path.join(distPath, "index.html"));
+      res.sendFile(path.join(activeDist, "index.html"));
     });
   }
 

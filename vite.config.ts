@@ -10,6 +10,7 @@ export default defineConfig({
   },
   esbuild: {
     target: "es2022",
+    legalComments: "none",
     supported: {
       destructuring: true,
     },
@@ -47,23 +48,35 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (id.includes("react-dom") || id.includes("react/")) {
-              return "vendor-react";
+            if (id.includes("lucide-react")) {
+              return "vendor-icons";
             }
             if (id.includes("leaflet")) {
               return "vendor-leaflet";
             }
-            if (id.includes("@googlemaps")) {
+            if (id.includes("@googlemaps") || id.includes("react-google-maps")) {
               return "vendor-maps";
+            }
+            if (id.includes("embla-carousel")) {
+              return "vendor-carousel";
+            }
+            if (id.includes("date-fns") || id.includes("day-picker")) {
+              return "vendor-date";
+            }
+            if (id.includes("react-hook-form") || id.includes("@hookform") || id.includes("/zod/")) {
+              return "vendor-form";
+            }
+            if (id.includes("class-variance-authority")) {
+              return "vendor-cva";
+            }
+            if (id.includes("@radix-ui") || id.includes("cmdk")) {
+              return "vendor-radix";
             }
             if (id.includes("@tanstack")) {
               return "vendor-query";
             }
-            if (id.includes("@radix-ui")) {
-              return "vendor-radix";
-            }
-            if (id.includes("lucide-react")) {
-              return "vendor-icons";
+            if (/\/node_modules\/(react|react-dom|scheduler)\//.test(id)) {
+              return "vendor-react";
             }
           }
         },

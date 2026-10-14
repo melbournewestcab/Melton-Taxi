@@ -1,11 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "wouter";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -21,6 +15,7 @@ import {
   CheckCircle2,
   Clock,
   Car,
+  ChevronDown,
   ChevronRight,
   Baby,
   Users,
@@ -229,6 +224,7 @@ export const FAQ_DATA: FAQItem[] = [
 export function HomeFAQ() {
   const [activeCategory, setActiveCategory] = useState<"all" | "booking" | "airport" | "coverage" | "pricing" | "fleet">("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [openFaqId, setOpenFaqId] = useState<string | null>(null);
 
   const categories = [
     { id: "all", label: "All Questions", icon: <HelpCircle className="w-3.5 h-3.5" /> },
@@ -384,49 +380,65 @@ export function HomeFAQ() {
             </Button>
           </div>
         ) : (
-          <Accordion type="single" collapsible className="space-y-3 mb-12">
-            {filteredFaqs.map((faq) => (
-              <AccordionItem
-                key={faq.id}
-                value={faq.id}
-                className="bg-background border border-border rounded-xl px-5 py-0.5 shadow-xs transition-all hover:border-primary/40 data-[state=open]:border-primary/60 data-[state=open]:bg-secondary/30"
-              >
-                <AccordionTrigger className="text-left font-bold text-sm sm:text-base text-white hover:no-underline py-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-left pr-3">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-secondary text-primary w-fit border border-primary/20 shrink-0">
-                      {faq.categoryLabel}
-                    </span>
-                    <span className="leading-snug">{faq.question}</span>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-xs sm:text-sm leading-relaxed pb-5 pt-1 border-t border-border/40 space-y-3">
-                  <p>{faq.answer}</p>
-                  
-                  {faq.bullets && faq.bullets.length > 0 && (
-                    <ul className="space-y-1.5 pl-2">
-                      {faq.bullets.map((b, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+          <div className="space-y-3 mb-12">
+            {filteredFaqs.map((faq) => {
+              const isOpen = openFaqId === faq.id;
+              return (
+                <div
+                  key={faq.id}
+                  className={`bg-background border rounded-xl px-5 py-0.5 shadow-xs transition-colors ${
+                    isOpen ? "border-primary/60 bg-secondary/30" : "border-border hover:border-primary/40"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqId((prev) => (prev === faq.id ? null : faq.id))}
+                    className="w-full flex items-center justify-between text-left font-bold text-sm sm:text-base text-white hover:no-underline py-4 cursor-pointer"
+                    aria-expanded={isOpen}
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-left pr-3">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-secondary text-primary w-fit border border-primary/20 shrink-0">
+                        {faq.categoryLabel}
+                      </span>
+                      <span className="leading-snug">{faq.question}</span>
+                    </div>
+                    <ChevronDown
+                      className={`w-4 h-4 shrink-0 text-muted-foreground transition-transform duration-200 ${
+                        isOpen ? "rotate-180 text-primary" : ""
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="text-muted-foreground text-xs sm:text-sm leading-relaxed pb-5 pt-1 border-t border-border/40 space-y-3">
+                      <p>{faq.answer}</p>
+                      
+                      {faq.bullets && faq.bullets.length > 0 && (
+                        <ul className="space-y-1.5 pl-2">
+                          {faq.bullets.map((b, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
 
-                  {faq.actionLink && (
-                    <div className="pt-2">
-                      <Link
-                        href={faq.actionLink.href}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline uppercase tracking-wider"
-                      >
-                        {faq.actionLink.label} <ChevronRight className="w-3.5 h-3.5" />
-                      </Link>
+                      {faq.actionLink && (
+                        <div className="pt-2">
+                          <Link
+                            href={faq.actionLink.href}
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline uppercase tracking-wider"
+                          >
+                            {faq.actionLink.label} <ChevronRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   )}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+                </div>
+              );
+            })}
+          </div>
         )}
 
         {/* ── Direct Support / Booking Action Card ── */}

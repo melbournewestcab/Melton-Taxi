@@ -11,6 +11,8 @@ export function BrandLogo({ className = "", size = "md" }: BrandLogoProps) {
       {/* Sleek aerodynamic sports car silhouette matching the theme */}
       <svg
         viewBox="0 0 340 76"
+        width="340"
+        height="76"
         className={
           size === "sm"
             ? "w-28 h-auto"

@@ -1,7 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/Navbar";
 
 const Footer = lazy(() => import("@/components/Footer").then((m) => ({ default: m.Footer })));
@@ -41,10 +39,6 @@ const EventPage = lazy(() => import("@/pages/services/Event"));
 const CorporatePage = lazy(() => import("@/pages/services/Corporate"));
 const OwnerDashboard = lazy(() => import("@/pages/OwnerDashboard"));
 const LandingPage = lazy(() => import("@/pages/LandingPage"));
-
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: 60_000, gcTime: 300_000 } },
-});
 
 function PageLoader() {
   return (
@@ -128,38 +122,53 @@ function VisitorTracker() {
   return null;
 }
 
+function DeferredToaster() {
+  const [mounted, setMounted] = React.useState(false);
+  useEffect(() => {
+    if ("requestIdleCallback" in window) {
+      const id = (window as any).requestIdleCallback(() => setMounted(true));
+      return () => (window as any).cancelIdleCallback(id);
+    } else {
+      const t = setTimeout(() => setMounted(true), 2500);
+      return () => clearTimeout(t);
+    }
+  }, []);
+  if (!mounted) return null;
+  return (
+    <Suspense fallback={null}>
+      <Toaster />
+    </Suspense>
+  );
+}
+
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={(import.meta.env.BASE_URL || "").replace(/\/$/, "")}>
-          <ScrollToTop />
-          <VisitorTracker />
-          <Suspense fallback={null}>
-            <Switch>
-              {/* Hidden owner-only dashboard — not linked anywhere on the site */}
-              <Route path="/bmt-owner-panel" component={OwnerDashboard} />
-              {/* High-conversion Google Ads landing page — standalone, no nav/footer */}
-              {/* /ads is the clean URL used in Google Ads final URLs */}
-              <Route path="/ads" component={LandingPage} />
-              <Route path="/landing" component={LandingPage} />
-              {/* All public routes wrapped in site chrome */}
-              <Route>
-                <div className="min-h-[100dvh] flex flex-col bg-background text-foreground pt-[68px]">
-                  <Navbar />
-                  <main className="flex-1">
-                    <Router />
-                  </main>
-                  <Footer />
-                  <FloatingContact />
-                </div>
-              </Route>
-            </Switch>
-          </Suspense>
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <WouterRouter base={(import.meta.env.BASE_URL || "").replace(/\/$/, "")}>
+      <ScrollToTop />
+      <VisitorTracker />
+      <Suspense fallback={null}>
+        <Switch>
+          {/* Hidden owner-only dashboard — not linked anywhere on the site */}
+          <Route path="/bmt-owner-panel" component={OwnerDashboard} />
+          {/* High-conversion Google Ads landing page — standalone, no nav/footer */}
+          {/* /ads is the clean URL used in Google Ads final URLs */}
+          <Route path="/ads" component={LandingPage} />
+          <Route path="/landing" component={LandingPage} />
+          {/* All public routes wrapped in site chrome */}
+          <Route>
+            <div className="min-h-[100dvh] flex flex-col bg-background text-foreground pt-[68px]">
+              <Navbar />
+              <main className="flex-1">
+                <Router />
+              </main>
+              <Footer />
+              <FloatingContact />
+            </div>
+          </Route>
+        </Switch>
+      </Suspense>
+      <DeferredToaster />
+    </WouterRouter>
   );
 }
 

@@ -58,16 +58,13 @@
     <meta name="application-name" content="Melton Taxi" />
     <meta name="format-detection" content="telephone=yes" />
 
-    <!-- DNS prefetch for external services -->
-    <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org" />
-    <link rel="dns-prefetch" href="https://tile.openstreetmap.org" />
+    <!-- DNS prefetch for fonts -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
     <!-- Fonts: Non-blocking asynchronous load with font-display: swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
@@ -100,6 +97,10 @@
     <meta name="twitter:title" content="Melton Taxi | Melton Bacchus Marsh Taxi &amp; Airport Transfers | 0401 134 074" />
     <meta name="twitter:description" content="Melton Taxi &amp; Bacchus Marsh Melton cab taxi service. 24/7 reliable airport transfers to Tullamarine &amp; Avalon, fixed fares &amp; Maxi Taxis. Call 0401 134 074." />
     <meta name="twitter:image" content="/images/hero-taxi.webp" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
 
     <!-- Structured Data (Schema.org JSON-LD Graph for Multi-Location Taxi Service) -->
     <script type="application/ld+json">
