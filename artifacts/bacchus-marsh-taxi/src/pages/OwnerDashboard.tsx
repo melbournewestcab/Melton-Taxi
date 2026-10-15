@@ -129,10 +129,10 @@ export default function OwnerDashboard() {
 
   // Dispatch & Email Settings state (zero third-party, file-persisted)
   const [settings, setSettings] = useState<DispatchSettings>({
-    ownerEmails: "p2839582@gmail.com",
+    ownerEmails: "info@meltontaxi.au",
     dispatchPhone: "0401134074",
     whatsappNumber: "61401134074",
-    emailUser: "p2839582@gmail.com",
+    emailUser: "info@meltontaxi.au",
     emailPass: "",
     hasEmailPass: false,
     smtpHost: "smtp.gmail.com",
@@ -1067,7 +1067,7 @@ export default function OwnerDashboard() {
                     type="text"
                     value={settings.ownerEmails}
                     onChange={e => setSettings({ ...settings, ownerEmails: e.target.value })}
-                    placeholder="p2839582@gmail.com"
+                    placeholder="info@meltontaxi.au"
                     className="w-full px-4 py-2.5 rounded-lg bg-[#121212] border border-border text-foreground font-mono focus:outline-none focus:border-primary"
                     required
                   />
@@ -1124,7 +1124,7 @@ export default function OwnerDashboard() {
                     type="email"
                     value={settings.emailUser || ""}
                     onChange={e => setSettings({ ...settings, emailUser: e.target.value })}
-                    placeholder="p2839582@gmail.com"
+                    placeholder="info@meltontaxi.au"
                     className="w-full px-4 py-2.5 rounded-lg bg-[#121212] border border-border text-foreground font-mono focus:outline-none focus:border-primary"
                   />
                   <p className="text-[11px] text-muted-foreground">
@@ -1157,7 +1157,7 @@ export default function OwnerDashboard() {
                   <span>💡</span> How to generate your 16-character Google App Password (2 minutes):
                 </div>
                 <ol className="list-decimal list-inside space-y-1 text-muted-foreground leading-relaxed">
-                  <li>Go to your Google Account (<strong className="text-foreground">myaccount.google.com</strong>) with <code className="text-primary font-mono">{settings.emailUser || "p2839582@gmail.com"}</code></li>
+                  <li>Go to your Google Account (<strong className="text-foreground">myaccount.google.com</strong>) with <code className="text-primary font-mono">{settings.emailUser || "info@meltontaxi.au"}</code></li>
                   <li>Click <strong className="text-foreground">Security</strong> in the left sidebar</li>
                   <li>Under "How you sign in to Google", turn on <strong className="text-foreground">2-Step Verification</strong> (if not already enabled)</li>
                   <li>In the search box at the top, type <strong className="text-foreground">App passwords</strong> and press Enter</li>

@@ -68,8 +68,8 @@ async function startServer() {
   app.post("/api/bookings", async (req, res) => {
     try {
       const data = req.body || {};
-      const bookingId = `BMT-${Date.now().toString(36).toUpperCase()}`;
-      const recipient = process.env.OWNER_EMAIL || "p2839582@gmail.com";
+      const bookingId = `MT-${Math.floor(100000 + Math.random() * 900000)}`;
+      const recipient = process.env.OWNER_EMAIL || "info@meltontaxi.au";
 
       console.log(`[Node.js Server] New booking ${bookingId} for ${data.name} (${data.phone}) - Pickup: ${data.pickupAddress}`);
 

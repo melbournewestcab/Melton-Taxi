@@ -1372,8 +1372,9 @@ function BookingFormInner({ initialVehicle = "", showMinimumToast = false, showM
       { data: { ...data, distanceKm: distanceKm || undefined, estimatedFare: fareEstimate?.total || undefined } as any },
       {
         onSuccess: (res: any) => {
+          const refId = res.bookingId || `MT-${Math.floor(100000 + Math.random() * 900000)}`;
           setConfirmedBooking({
-            bookingId: res.bookingId || `BMT-${Date.now().toString(36).toUpperCase()}`,
+            bookingId: refId,
             name: data.name,
             phone: data.phone,
             pickupAddress: data.pickupAddress,
@@ -1388,7 +1389,7 @@ function BookingFormInner({ initialVehicle = "", showMinimumToast = false, showM
 
           toast({
             title: "Booking Confirmed & Dispatched",
-            description: `Reference #${res.bookingId || "BMT"}. Our dispatch team will confirm your driver shortly!`,
+            description: `Reference #${refId}. Sent to dispatch at info@meltontaxi.au. Our team will confirm your driver shortly!`,
           });
           form.reset();
           setPickupCoords(null); setDropoffCoords(null);
@@ -2114,14 +2115,22 @@ function BookingFormInner({ initialVehicle = "", showMinimumToast = false, showM
               </div>
 
               {/* Direct Support & Action Buttons */}
-              <div className="p-3 rounded-lg bg-secondary/50 border border-border text-center space-y-1">
-                <p className="text-xs text-muted-foreground">Need urgent adjustments or immediate pickup?</p>
-                <a
-                  href="tel:0401134074"
-                  className="text-sm font-bold text-primary hover:underline inline-flex items-center gap-1.5"
-                >
-                  📞 Direct Line: 0401 134 074
-                </a>
+              <div className="p-3.5 rounded-lg bg-secondary/50 border border-border text-center space-y-1.5">
+                <p className="text-xs text-muted-foreground">Booking dispatched directly to <strong className="text-foreground">info@meltontaxi.au</strong></p>
+                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 pt-0.5">
+                  <a
+                    href="tel:0401134074"
+                    className="text-xs font-bold text-primary hover:underline inline-flex items-center gap-1"
+                  >
+                    📞 0401 134 074
+                  </a>
+                  <a
+                    href="mailto:info@meltontaxi.au"
+                    className="text-xs font-medium text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
+                  >
+                    ✉️ info@meltontaxi.au
+                  </a>
+                </div>
               </div>
 
               <DialogFooter className="flex-col sm:flex-row gap-2 pt-2">

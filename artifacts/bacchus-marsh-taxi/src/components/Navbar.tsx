@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown, ChevronRight, Phone } from "lucide-react";
 import { Button } from "./ui/button";
@@ -31,7 +32,8 @@ const SERVICES = [
 ];
 
 export function Navbar() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
+  const [mounted, setMounted] = useState(false);
   const [areasOpen, setAreasOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -42,6 +44,25 @@ export function Navbar() {
   const areasRef = useRef<HTMLDivElement>(null);
 
   const isActive = (path: string) => location === path || location.startsWith(path + "/");
+
+  const handleNav = (href: string) => {
+    setSheetOpen(false);
+    setServicesOpen(false);
+    setAreasOpen(false);
+    setLocation(href);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Automatically close mobile menu when navigating to another page
+  useEffect(() => {
+    setSheetOpen(false);
+  }, [location]);
 
   // Handle escape key and click outside to close dropdowns
   useEffect(() => {
@@ -83,7 +104,8 @@ export function Navbar() {
   }, [sheetOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/98 backdrop-blur-md border-b border-border shadow-lg" role="navigation">
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/98 backdrop-blur-md border-b border-border shadow-lg" role="navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20 lg:h-24 gap-4">
 
@@ -259,148 +281,218 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Lightweight, high-performance mobile drawer */}
-      {sheetOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs transition-opacity duration-200"
-          onClick={() => setSheetOpen(false)}
-          aria-hidden="true"
-        />
+      </nav>
+
+      {/* Full-viewport mobile drawer via Portal to escape backdrop-filter containing block */}
+      {mounted && createPortal(
+        <>
+          {/* Backdrop */}
+          <div
+            className={`fixed inset-0 z-[9998] bg-black/80 backdrop-blur-xs transition-opacity duration-300 ${
+              sheetOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            }`}
+            onClick={() => setSheetOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Full Screen Slide-in Drawer */}
+          <div
+            className={`fixed top-0 bottom-0 right-0 z-[9999] w-[88vw] sm:w-[420px] max-w-full h-[100dvh] bg-[#0b0f17] text-foreground border-l border-border flex flex-col justify-between pt-6 pb-6 px-0 overflow-y-auto transition-transform duration-300 ease-in-out shadow-2xl ${
+              sheetOpen ? "translate-x-0" : "translate-x-full pointer-events-none"
+            }`}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation Menu"
+          >
+            {/* Header in mobile sheet */}
+            <div className="px-6 pb-5 border-b border-border flex items-center justify-between shrink-0">
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav("/");
+                }}
+                className="flex items-center cursor-pointer"
+              >
+                <BrandLogo size="sm" />
+              </a>
+              <button
+                type="button"
+                onClick={() => setSheetOpen(false)}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-muted-foreground hover:text-white hover:bg-secondary/80 border border-border/80 transition-colors cursor-pointer"
+                aria-label="Close menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Menu navigation options */}
+            <div className="flex flex-col divide-y divide-border/60 flex-1 overflow-y-auto">
+              {/* Home */}
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav("/");
+                }}
+                className={`flex items-center justify-between px-6 py-4.5 text-base font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                  location === "/" ? "text-primary bg-primary/10" : "text-foreground hover:text-primary hover:bg-secondary/40"
+                }`}
+              >
+                <span>Home</span>
+                <ChevronRight className={`w-5 h-5 ${location === "/" ? "text-primary" : "text-muted-foreground"}`} />
+              </a>
+
+              {/* Services accordion */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setMobileServicesOpen((prev) => !prev)}
+                  className={`flex items-center justify-between w-full px-6 py-4.5 text-base font-black uppercase tracking-wider hover:text-primary hover:bg-secondary/40 transition-colors cursor-pointer ${
+                    isActive("/services") ? "text-primary bg-primary/5" : "text-foreground"
+                  }`}
+                  aria-expanded={mobileServicesOpen}
+                >
+                  <span>Our Services</span>
+                  <ChevronRight className={`w-5 h-5 transition-transform duration-200 ${mobileServicesOpen ? "rotate-90 text-primary" : "text-muted-foreground"}`} />
+                </button>
+                {mobileServicesOpen && (
+                  <div className="pb-2 flex flex-col bg-secondary/30 divide-y divide-border/30">
+                    <a
+                      href="/services"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNav("/services");
+                      }}
+                      className="px-8 py-3 text-sm font-black text-primary hover:text-white transition-colors bg-primary/10 cursor-pointer"
+                    >
+                      All Services Overview →
+                    </a>
+                    {SERVICES.map((s) => (
+                      <a
+                        key={s.href}
+                        href={s.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNav(s.href);
+                        }}
+                        className={`px-8 py-3 text-sm font-bold transition-colors cursor-pointer ${
+                          location === s.href ? "text-primary bg-primary/15 font-black" : "text-muted-foreground hover:text-primary"
+                        }`}
+                      >
+                        {s.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Fleet */}
+              <a
+                href="/fleet"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav("/fleet");
+                }}
+                className={`flex items-center justify-between px-6 py-4.5 text-base font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                  isActive("/fleet") ? "text-primary bg-primary/10" : "text-foreground hover:text-primary hover:bg-secondary/40"
+                }`}
+              >
+                <span>Our Fleet</span>
+                <ChevronRight className={`w-5 h-5 ${isActive("/fleet") ? "text-primary" : "text-muted-foreground"}`} />
+              </a>
+
+              {/* Service Areas accordion */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setMobileAreasOpen((prev) => !prev)}
+                  className={`flex items-center justify-between w-full px-6 py-4.5 text-base font-black uppercase tracking-wider hover:text-primary hover:bg-secondary/40 transition-colors cursor-pointer ${
+                    isActive("/service-areas") ? "text-primary bg-primary/5" : "text-foreground"
+                  }`}
+                  aria-expanded={mobileAreasOpen}
+                >
+                  <span>Melton &amp; Service Areas</span>
+                  <ChevronRight className={`w-5 h-5 transition-transform duration-200 ${mobileAreasOpen ? "rotate-90 text-primary" : "text-muted-foreground"}`} />
+                </button>
+                {mobileAreasOpen && (
+                  <div className="pb-2 flex flex-col bg-secondary/30 max-h-72 overflow-y-auto divide-y divide-border/30">
+                    <a
+                      href="/service-areas"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNav("/service-areas");
+                      }}
+                      className="px-8 py-3 text-sm font-black text-primary hover:text-white transition-colors bg-primary/10 cursor-pointer"
+                    >
+                      All Suburbs Directory →
+                    </a>
+                    {FEATURED_SUBURBS.map((a) => (
+                      <a
+                        key={a.href}
+                        href={a.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNav(a.href);
+                        }}
+                        className={`px-8 py-2.5 text-sm font-bold transition-colors cursor-pointer ${
+                          location === a.href ? "text-primary bg-primary/15 font-black" : "text-muted-foreground hover:text-primary"
+                        }`}
+                      >
+                        {a.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Book Online */}
+              <a
+                href="/book"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav("/book");
+                }}
+                className={`flex items-center justify-between px-6 py-4.5 text-base font-black uppercase tracking-wider transition-colors cursor-pointer ${
+                  isActive("/book") ? "bg-primary text-black" : "text-primary hover:bg-secondary/40"
+                }`}
+              >
+                <span>Book Online</span>
+                <ChevronRight className={`w-5 h-5 ${isActive("/book") ? "text-black" : "text-primary"}`} />
+              </a>
+            </div>
+
+            {/* Mobile Bottom CTA Action Bar */}
+            <div className="shrink-0 mt-auto px-6 pt-4 pb-2 flex flex-col gap-2.5 border-t border-border bg-card/60">
+              <button
+                type="button"
+                onClick={() => handleNav("/book")}
+                className="w-full h-11 text-xs font-bold text-black bg-primary hover:bg-primary/90 uppercase tracking-wider rounded-full shadow-md flex items-center justify-center cursor-pointer active:scale-95 transition-all"
+              >
+                Book a Melton Taxi
+              </button>
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href="tel:0401134074"
+                  className="flex items-center justify-center gap-1.5 h-10 text-xs font-bold text-white border border-primary/70 rounded-full hover:bg-primary hover:text-black transition-all shadow-xs"
+                >
+                  <Phone className="w-3.5 h-3.5 text-primary" />
+                  Call Now
+                </a>
+                <a
+                  href="https://wa.me/61401134074?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20a%20taxi%20booking"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-1.5 h-10 text-xs font-bold text-white bg-[#25D366]/20 border border-[#25D366]/60 rounded-full hover:bg-[#25D366] hover:text-black transition-all shadow-xs"
+                >
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </>,
+        document.body
       )}
-
-      <div
-        className={`fixed top-0 bottom-0 right-0 z-50 w-[88vw] sm:w-[420px] bg-background border-l border-border flex flex-col gap-0 pt-8 px-0 overflow-y-auto transition-transform duration-300 ease-in-out ${
-          sheetOpen ? "translate-x-0 shadow-2xl" : "translate-x-full pointer-events-none"
-        }`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Navigation Menu"
-      >
-        {/* Header in mobile sheet */}
-        <div className="px-6 pb-6 border-b border-border flex items-center justify-between">
-          <BrandLogo size="md" />
-          <button
-            type="button"
-            onClick={() => setSheetOpen(false)}
-            className="p-2 rounded-full text-muted-foreground hover:text-white hover:bg-secondary/80 transition-colors cursor-pointer"
-            aria-label="Close menu"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* Double sized menu navigation list */}
-        <div className="flex flex-col divide-y divide-border/60">
-          <Link
-            href="/"
-            onClick={() => setSheetOpen(false)}
-            className="flex items-center justify-between px-6 py-5 text-lg font-black uppercase tracking-wider hover:text-primary hover:bg-secondary/40 transition-colors"
-          >
-            <span>Home</span>
-            <ChevronRight className="w-6 h-6 text-muted-foreground" />
-          </Link>
-
-          {/* Services accordion */}
-          <div>
-            <button
-              type="button"
-              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-              className="flex items-center justify-between w-full px-6 py-5 text-lg font-black uppercase tracking-wider hover:text-primary hover:bg-secondary/40 transition-colors cursor-pointer"
-            >
-              <span>Our Services</span>
-              <ChevronRight className={`w-6 h-6 transition-transform duration-200 ${mobileServicesOpen ? "rotate-90 text-primary" : "text-muted-foreground"}`} />
-            </button>
-            {mobileServicesOpen && (
-              <div className="pb-3 flex flex-col bg-secondary/25 divide-y divide-border/30">
-                <Link
-                  href="/services"
-                  onClick={() => setSheetOpen(false)}
-                  className="px-8 py-3.5 text-sm font-black text-primary hover:text-white transition-colors bg-primary/10"
-                >
-                  All Services Overview →
-                </Link>
-                {SERVICES.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    onClick={() => setSheetOpen(false)}
-                    className="px-8 py-3.5 text-base font-bold text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {s.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Fleet */}
-          <Link
-            href="/fleet"
-            onClick={() => setSheetOpen(false)}
-            className="flex items-center justify-between px-6 py-5 text-lg font-black uppercase tracking-wider hover:text-primary hover:bg-secondary/40 transition-colors"
-          >
-            <span>Our Fleet</span>
-            <ChevronRight className="w-6 h-6 text-muted-foreground" />
-          </Link>
-
-          {/* Service Areas accordion */}
-          <div>
-            <button
-              type="button"
-              onClick={() => setMobileAreasOpen(!mobileAreasOpen)}
-              className="flex items-center justify-between w-full px-6 py-5 text-lg font-black uppercase tracking-wider hover:text-primary hover:bg-secondary/40 transition-colors cursor-pointer"
-            >
-              <span>Melton &amp; Service Areas</span>
-              <ChevronRight className={`w-6 h-6 transition-transform duration-200 ${mobileAreasOpen ? "rotate-90 text-primary" : "text-muted-foreground"}`} />
-            </button>
-            {mobileAreasOpen && (
-              <div className="pb-3 flex flex-col bg-secondary/25 max-h-72 overflow-y-auto divide-y divide-border/30">
-                <Link
-                  href="/service-areas"
-                  onClick={() => setSheetOpen(false)}
-                  className="px-8 py-3.5 text-sm font-black text-primary hover:text-white transition-colors bg-primary/10"
-                >
-                  All Suburbs Directory →
-                </Link>
-                {FEATURED_SUBURBS.map((a) => (
-                  <Link
-                    key={a.href}
-                    href={a.href}
-                    onClick={() => setSheetOpen(false)}
-                    className="px-8 py-3 text-base font-bold text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {a.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Book Online */}
-          <Link
-            href="/book"
-            onClick={() => setSheetOpen(false)}
-            className="flex items-center justify-between px-6 py-5 text-lg font-black uppercase tracking-wider text-primary hover:bg-secondary/40 transition-colors"
-          >
-            <span>Book Online</span>
-            <ChevronRight className="w-6 h-6 text-primary" />
-          </Link>
-        </div>
-
-        {/* Mobile Bottom CTA Action Bar */}
-        <div className="mt-auto px-6 py-5 flex flex-col gap-2.5 border-t border-border bg-card/60">
-          <Button asChild size="default" className="w-full h-10 text-xs font-bold text-black bg-primary hover:bg-primary/90 uppercase tracking-wider rounded-full shadow-md">
-            <Link href="/book" onClick={() => setSheetOpen(false)}>Book a Melton Taxi</Link>
-          </Button>
-          <a
-            href="tel:0401134074"
-            className="flex items-center justify-center gap-2 w-full h-10 text-xs font-bold text-white border border-primary/70 rounded-full hover:bg-primary hover:text-black transition-all shadow-xs"
-          >
-            <Phone className="w-4 h-4 text-primary" />
-            Call 0401 134 074
-          </a>
-        </div>
-      </div>
-    </nav>
+    </>
   );
 }

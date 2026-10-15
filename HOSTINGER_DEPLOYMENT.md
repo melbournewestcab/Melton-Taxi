@@ -98,8 +98,8 @@ You can configure these directly in Hostinger's Node.js Environment Variables se
 |---|---|---|
 | `PORT` | Web server port | Assigned by Hostinger (default `3000`) |
 | `NODE_ENV` | Environment mode | `production` |
-| `OWNER_EMAIL` | Booking notification recipient email | `p2839582@gmail.com` |
-| `EMAIL_USER` | Gmail address for dispatch notifications | `p2839582@gmail.com` |
+| `OWNER_EMAIL` | Booking notification recipient email | `info@meltontaxi.au` |
+| `EMAIL_USER` | Gmail address for dispatch notifications | `info@meltontaxi.au` |
 | `EMAIL_PASS` | Google 16-character App Password | (Optional) |
 | `DATABASE_URL` | PostgreSQL connection string | (Optional - in-memory fallback enabled) |
 | `VISITOR_SECRET`| Access password for `/bmt-owner-panel` | `bmt-admin-2024` |

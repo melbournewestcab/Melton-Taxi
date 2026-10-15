@@ -481,7 +481,7 @@ router.get("/reverse-geocode", async (req: Request, res: Response) => {
     const osmUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&zoom=18`;
     const osmRes = await fetch(osmUrl, {
       headers: {
-        "User-Agent": "BacchusMarshTaxiApp/1.0 (info@bacchusmarshtaxi.com.au)",
+        "User-Agent": "MeltonTaxiApp/1.0 (info@meltontaxi.au)",
         "Accept": "application/json",
       },
     });
