@@ -3,10 +3,14 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  mode: mode || "production",
   root: path.resolve(process.cwd(), "artifacts/bacchus-marsh-taxi"),
   server: {
     hmr: false,
+  },
+  define: {
+    "process.env.NODE_ENV": JSON.stringify(mode === "production" ? "production" : "development"),
   },
   esbuild: {
     target: "es2022",
@@ -89,4 +93,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

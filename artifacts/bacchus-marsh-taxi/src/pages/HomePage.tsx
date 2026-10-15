@@ -190,7 +190,7 @@ export default function HomePage() {
               alt="Melton Taxi servicing Melton &amp; Bacchus marsh and all nearby areas"
               className="w-full h-full object-cover opacity-35"
               decoding="async"
-              {...{ fetchpriority: "high" }}
+              loading="eager"
               width="1400"
               height="800"
             />

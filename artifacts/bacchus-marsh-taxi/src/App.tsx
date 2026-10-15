@@ -6,7 +6,7 @@ const Footer = lazy(() => import("@/components/Footer").then((m) => ({ default: 
 const FloatingContact = lazy(() => import("@/components/FloatingContact").then((m) => ({ default: m.FloatingContact })));
 const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
 
-const HomePage = lazy(() => import("@/pages/HomePage"));
+import HomePage from "@/pages/HomePage";
 const NotFound = lazy(() => import("@/pages/not-found"));
 const ServicesPage = lazy(() => import("@/pages/ServicesPage"));
 const FleetPage = lazy(() => import("@/pages/FleetPage"));
