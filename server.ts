@@ -106,10 +106,22 @@ async function start() {
       })
     );
 
+    const indexHtmlPath = path.join(activeDist, "index.html");
+    let cachedIndexHtml = "";
+    try {
+      cachedIndexHtml = fs.readFileSync(indexHtmlPath, "utf8");
+    } catch (e) {
+      console.warn("[Node.js Server] Could not preload index.html into memory:", e);
+    }
+
     app.use((_req: Request, res: Response) => {
       res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
       res.setHeader("X-Content-Type-Options", "nosniff");
-      res.sendFile(path.join(activeDist, "index.html"));
+      if (cachedIndexHtml) {
+        res.type("html").send(cachedIndexHtml);
+      } else {
+        res.sendFile(indexHtmlPath);
+      }
     });
   }
 

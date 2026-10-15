@@ -184,15 +184,18 @@ export default function HomePage() {
       <section className="relative min-h-[85vh] w-full flex items-center justify-center overflow-hidden bg-background py-16 md:py-24">
         <div className="absolute inset-0 z-0">
           <picture>
-            <source media="(max-width: 640px)" srcSet="/images/hero-taxi-mobile.webp" type="image/webp" />
+            <source media="(max-width: 640px)" srcSet="/images/hero-taxi-mobile.webp" width="640" height="480" type="image/webp" />
+            <source media="(min-width: 641px)" srcSet="/images/hero-taxi.webp" width="1280" height="960" type="image/webp" />
             <img
-              src="/images/hero-taxi.webp"
+              src="/images/hero-taxi-mobile.webp"
+              srcSet="/images/hero-taxi-mobile.webp 640w, /images/hero-taxi.webp 1280w"
+              sizes="(max-width: 640px) 100vw, 1280px"
               alt="Melton Taxi servicing Melton &amp; Bacchus marsh and all nearby areas"
               className="w-full h-full object-cover opacity-35"
               decoding="async"
               loading="eager"
-              width="1400"
-              height="800"
+              width="640"
+              height="480"
             />
           </picture>
           <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background" />
